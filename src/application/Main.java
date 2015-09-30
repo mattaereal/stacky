@@ -3,6 +3,10 @@ package application;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.StaxDriver;
 
+import cards.Card;
+import cards.CardDeck;
+import cards.CardType;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
@@ -151,57 +155,8 @@ public class Main {
 //		ironman.addAttribute("Batallas ganadas", 200);
 //		ironman.addAttribute("Edad", 45);
 //		
-		CardType cars = new CardType();
-		cars.addAttribute("RPM");
-		cars.addAttribute("Velocidad");
-		cars.addAttribute("Kms");
-		cars.addAttribute("Año");
 		
-		Card v8 = new Card("V8 Car", cars);
-		v8.addAttribute("RPM", 250);
-		v8.addAttribute("Velocidad", 200);
-		v8.addAttribute("Kms", 200);
-		v8.addAttribute("Año", 45);
-//		
-//		
-//		CompositeCard lj = new CompositeCard("Liga de la Justicia", supertest);
-//		lj.addCard(batman);
-//		lj.addCard(superman);
-//		lj.addCard(wonderwoman);
-//		System.out.println("[Test] Agregando una carta que tiene otro ctype:");
-//		lj.addCard(v8);
-//		
-//		CompositeCard avengers = new CompositeCard("Avengers", supertest);
-//		avengers.addCard(hulk);
-//		avengers.addCard(spiderman);
-//		
-//		avengers.printAttributes();
-//		
-//		batman.printAttributes();
-//		wonderwoman.printAttributes();
-//		
-//		lj.printAttributes();
-//		lj.addCard(robin);
-//		lj.printAttributes();
-//		
-//		CompositeCard ljav = new CompositeCard("Liga de la Justicia & Avengers", supertest);
-//		ljav.addCard(avengers);
-//		ljav.addCard(lj);
-//		ljav.printAttributes();
-//
-//		CompositeCard all = new CompositeCard("Liga de la justicia & Avengers & All", supertest);
-//		all.addCard(ljav);
-//		all.addCard(ironman);
-//		all.addCard(hulk);
-//		all.addCard(avengers);
-//		all.addCard(lj);
-//		all.printAttributes();
-		
-		XStream xstream = new XStream(new StaxDriver());
-//		xstream.setMode(XStream.NO_REFERENCES);
-//		xstream.alias("Card deck", CardDeck.class);
-		
-		CardDeck deck = new CardDeck(superheroes);
+		CardDeck deck = new CardDeck("Superheroes", superheroes);
 		deck.addCard(SilverSurfer);
 		deck.addCard(Hulk);
 		deck.addCard(Wonderwoman);
@@ -210,64 +165,6 @@ public class Main {
 		deck.addCard(Cyclops);
 		deck.addCard(IceMan);
 		deck.addCard(Thor);
-		
-//		try {
-//			deck.addCard(v8);
-//		} catch(RuntimeException re) {
-//			//Logger.error(re.getMessage());
-//			//throw new Ex;
-//			//System.err.println("error");
-//		}
-		
-		
-		String xml = xstream.toXML(deck);
-		System.out.println(xml);
-		
-		CardDeck ddeck = (CardDeck) xstream.fromXML(xml);
-		System.out.println(ddeck.toString());
-		
-		if (ddeck.equals(deck)) {
-			System.out.println("Iguales!");
-		} else {
-			System.out.println("Difieren!");
-		}
-		
-		try {
-			File deckfile = new File("/home/matt/workspace/Stacky/decks/deck1.xml");
-			
-			if (!deckfile.exists()) {
-				deckfile.createNewFile();
-			}
-			
-			FileWriter fw = new FileWriter(deckfile.getAbsoluteFile());
-			BufferedWriter bw = new BufferedWriter(fw);
-			bw.write(xml);
-			bw.close();
-	
-			System.out.println("Done");
-			
-				BufferedReader br = new BufferedReader(new FileReader("/home/matt/workspace/Stacky/decks/deck1.xml"));
-			
-			String sCurrentLine;
-			xml = "";
-			while ((sCurrentLine = br.readLine()) != null) {
-				System.out.println(sCurrentLine);
-				xml += sCurrentLine+"\n";
-			}
-			
-			CardDeck fddeck = (CardDeck) xstream.fromXML(xml);
-			System.out.println(fddeck.toString());
-			
-			if (fddeck.equals(deck)) {
-				System.out.println("Iguales!");
-			} else {
-				System.out.println("Difieren!");
-			}
-	
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
 		
 		
 	}

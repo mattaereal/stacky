@@ -1,4 +1,4 @@
-package application;
+package utils;
 
 public final class Stuff {
 

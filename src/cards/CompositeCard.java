@@ -1,8 +1,10 @@
-package application;
+package cards;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+
+import utils.Stuff;
 
 public class CompositeCard extends AbstractCard {
 	private List<AbstractCard> cards;
@@ -34,6 +36,25 @@ public class CompositeCard extends AbstractCard {
 		} else {
 			System.out.println("Adding a card that has a different CardType.");
 		}
+	}
+	
+	public void delCard(String name) {
+		/* Deletes the first occurrence */
+		name = Stuff.capitalize(name);
+		AbstractCard curr;
+		Iterator<AbstractCard> it = this.cards.iterator();
+		while (it.hasNext()) {
+			curr = it.next();
+			if (curr.getName().equals(name)) {
+				delCard(curr);
+				return;
+			}
+		 }
+	}
+	
+	public void delCard(AbstractCard card) {
+		this.cards.remove(card);
+		this.update = true;
 	}
 
 	@Override
@@ -67,8 +88,9 @@ public class CompositeCard extends AbstractCard {
 				}
 				this.addAttribute(key, new Integer(sum / q));
 			}
+		} else {
+			super.init();
 		}
-		
 	}
 	
 

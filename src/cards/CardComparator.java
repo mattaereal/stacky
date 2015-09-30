@@ -1,4 +1,4 @@
-package application;
+package cards;
 
 import java.util.Comparator;
 

@@ -1,4 +1,4 @@
-package application;
+package cards;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;

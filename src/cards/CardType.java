@@ -1,8 +1,10 @@
-package application;
+package cards;
 
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
+
+import utils.Stuff;
 
 
 public class CardType {
@@ -32,9 +34,27 @@ public class CardType {
 		return this.attrs.iterator();
 	}
 	
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result
+                + this.attrs.hashCode();
+        return result;
+    }
 	
-	public boolean equals(CardType other) {
+	public boolean equals(final Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        final CardType other = (CardType) obj;
+		if (!this.attrs.equals(other.attrs)) {
+			return false;
+		}
 		
-		return (this.attrs.equals(other.attrs));
+		return true;
 	}
 }

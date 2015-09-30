@@ -1,4 +1,4 @@
-package application;
+package cards;
 
 public class Card extends AbstractCard {
 
