@@ -21,7 +21,6 @@ public class CardDeckFactory {
 			String sCurrentLine;
 									
 			while ((sCurrentLine = br.readLine()) != null) {
-				System.out.println(sCurrentLine);
 				xml += sCurrentLine+"\n";
 			}
 			
@@ -31,16 +30,16 @@ public class CardDeckFactory {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
 		return null;
 	}
 
-	public static void toFile(String path, CardDeck cd) {
+	public static boolean toFile(String path, CardDeck cd) {
 		XStream xstream = new XStream(new StaxDriver());
 		String xml = xstream.toXML(cd);
 		try {
 			File deckfile = new File(path);
-		
-			
+
 			if (!deckfile.exists()) {
 				deckfile.createNewFile();
 			}
@@ -49,11 +48,13 @@ public class CardDeckFactory {
 			BufferedWriter bw = new BufferedWriter(fw);
 			bw.write(xml);
 			bw.close();
-		
-			System.out.println("Deck saved at " + path);
+			
+			return true;
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
+		return false;
 	}
 	
 }
