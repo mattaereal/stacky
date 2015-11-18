@@ -34,7 +34,7 @@ public class CardDeck {
 		Iterator<AbstractCard> it = this.deck.iterator();
 		while (it.hasNext()) {
 			curr = it.next();
-			if (curr.getName().equals(name)) {
+			if (name.equals(Stuff.capitalize(curr.getName()))) {
 				this.delCard(curr);
 				return;
 			}

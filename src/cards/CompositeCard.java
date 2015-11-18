@@ -45,7 +45,9 @@ public class CompositeCard extends AbstractCard {
 		Iterator<AbstractCard> it = this.cards.iterator();
 		while (it.hasNext()) {
 			curr = it.next();
-			if (curr.getName().equals(name)) {
+			System.out.println(curr.getName());
+			
+			if (name.equals(Stuff.capitalize(curr.getName()))) {
 				delCard(curr);
 				return;
 			}
