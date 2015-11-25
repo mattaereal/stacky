@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Random;
 
+import game.Player;
 import utils.Stuff;
 
 public class CardDeck {
@@ -17,6 +19,12 @@ public class CardDeck {
 		this.deck = new ArrayList<AbstractCard>();
 		this.setName(name);
 		this.ctype = type;
+	}
+	
+	protected CardDeck(String name, CardType ctype2, ArrayList<AbstractCard> tmp) {
+		this.deck = tmp;
+		this.setName(name);
+		this.ctype = ctype2;
 	}
 
 	public void addCard(AbstractCard card) throws RuntimeException {
@@ -139,6 +147,36 @@ public class CardDeck {
 		this.name = name;
 	}
 	
+	/**
+	 *  Shuffles the content of the deck.
+	 */
+	public void shuffle() {
+		long seed = System.nanoTime();
+		Collections.shuffle(deck, new Random(seed));
+	}
+
+	public CardType getType() {
+		
+		return this.ctype;
+	}
 	
+	public AbstractCard pop() {
+		return this.deck.remove(0);
+	}
+	
+	public boolean isEmpty() {
+		return this.deck.isEmpty();
+	}
+	
+	public void split(Player p1, Player p2) {
+		ArrayList<AbstractCard> tmp;
+		
+		tmp = new ArrayList<AbstractCard>(deck.subList(0, deck.size()/2));
+		p1.setDeck(new CardDeck("P1's " + this.name, this.ctype, tmp));
+		
+		tmp = new ArrayList<AbstractCard>(deck.subList(deck.size()/2+1, deck.size()));
+		p2.setDeck(new CardDeck("P2's " + this.name, this.ctype, tmp));
+		
+	}
 
 }
