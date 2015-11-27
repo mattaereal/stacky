@@ -16,9 +16,11 @@ public class CardDeck {
 	private String name;
 
 	/**
+	 * Constructor of a card deck. It represents
+	 * a collection of certain type of cards.
 	 * 
-	 * @param name
-	 * @param type
+	 * @param name Name of card collection.
+	 * @param type Sets the type of the card set.
 	 */
 	public CardDeck(String name, CardType type) {
 		this.deck = new ArrayList<AbstractCard>();
@@ -26,12 +28,26 @@ public class CardDeck {
 		this.ctype = type;
 	}
 	
+	/**
+	 * Constructor of a card deck. It represents
+	 * a collection of certain type of cards.
+	 * 
+	 * @param name Name of card collection.
+	 * @param type Sets the type of the card set.
+	 * @param tmp A card deck that is being set by a list
+	 * of abstract cards.
+	 */
 	protected CardDeck(String name, CardType ctype2, ArrayList<AbstractCard> tmp) {
 		this.deck = tmp;
 		this.setName(name);
 		this.ctype = ctype2;
 	}
 
+	/**
+	 * Adds an AbstractCard to the collection.
+	 * @param card The card to be added to the set.
+	 * @throws RuntimeException
+	 */
 	public void addCard(AbstractCard card) throws RuntimeException {
 		if (card.getCtype().equals(this.ctype)) {
 			this.deck.add(card);
@@ -59,11 +75,20 @@ public class CardDeck {
 		 }
 	}
 	
+	/**
+	 * Deletes a card from the deck.
+	 * @param card The AbstractCard to be deleted.
+	 */
 	public void delCard(AbstractCard card) {
 		this.deck.remove(card);
 	}
-	
-	@Override
+
+	/**
+	 * Returns a concatenation of the names of every
+	 * card inside the deck.
+	 * @see java.lang.Object#toString()
+	 * 
+	 */
 	public String toString() {
 		String buff = "";
 		Iterator<AbstractCard> it = deck.iterator();
@@ -74,11 +99,20 @@ public class CardDeck {
 		return buff;
 	}
 	
+	/**
+	 * Gets current deck.
+	 * @return List of Abstract Cards
+	 */
 	public List<AbstractCard> getDeck() {
 		
 		return this.deck;
 	}
 	
+	/**
+	 * Checks whether a specific card exists or not.
+	 * @param card Card to be checked its existence.
+	 * @return True if exists, False otherwise.
+	 */
 	public boolean exists(AbstractCard card) {
 		Iterator<AbstractCard> it = this.deck.iterator();
 		while (it.hasNext()) {
@@ -90,6 +124,12 @@ public class CardDeck {
 		return false;
 	}
 	
+	/**
+	 * Checks whether a specific card exists or not
+	 * by its name.
+	 * @param name NAme of the card to be checked its existence.
+	 * @return True if exists, False otherwise.
+	 */
 	public boolean exists(String name) {
 		name = Stuff.capitalize(name);
 		Iterator<AbstractCard> it = this.deck.iterator();
@@ -102,6 +142,10 @@ public class CardDeck {
 		return false;
 	}
 	
+	/**
+	 * Equals.
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
 	public boolean equals(final Object obj) {
         if (this == obj)
             return true;
@@ -135,6 +179,10 @@ public class CardDeck {
 		return true;
 	}
 	
+	/**
+	 * HashCode.
+	 * @see java.lang.Object#hashCode()
+	 */
     public int hashCode() {
         final int prime = 31;
         int result = 1;
@@ -151,6 +199,7 @@ public class CardDeck {
 	}
 
 	/**
+	 * Sets the name of the deck.
 	 * @param name The name to be set.
 	 */
 	public void setName(String name) {
@@ -165,31 +214,64 @@ public class CardDeck {
 		Collections.shuffle(deck, new Random(seed));
 	}
 
+	/**
+	 * Returns the CardType of the deck.
+	 * @return CardType
+	 */
 	public CardType getType() {
 		
 		return this.ctype;
 	}
 	
+	
+	/**
+	 * Similar to a pop in a stack structure.
+	 * Returns the first abstract card of the pile.
+	 * 
+	 * @return AbstractCard
+	 */
 	public AbstractCard pop() {
 		return this.deck.remove(0);
 	}
 	
+	/**
+	 * Returns a boolean whether the deck
+	 * has any cards on it or not.
+	 * @return True if still has cards, False otherwise.
+	 */
 	public boolean isEmpty() {
 		return this.deck.isEmpty();
 	}
 	
+	/**
+	 * Splits a deck in half between two players.
+	 * It actually makes a copy of it and splits it.
+	 * @param p1 Player one.
+	 * @param p2 Player two.
+	 */
 	public void split(Player p1, Player p2) {
 		ArrayList<AbstractCard> tmp;
 		
 		tmp = new ArrayList<AbstractCard>(deck.subList(0, deck.size()/2));
-		p1.setDeck(new CardDeck("P1's " + this.name, this.ctype, tmp));
+		p1.setDeck(new CardDeck(p1.getName() + ": " + this.name, this.ctype, tmp));
 		
-		tmp = new ArrayList<AbstractCard>(deck.subList(deck.size()/2+1, deck.size()));
-		p2.setDeck(new CardDeck("P2's " + this.name, this.ctype, tmp));
+		tmp = new ArrayList<AbstractCard>(deck.subList(deck.size()/2, deck.size()));
+		p2.setDeck(new CardDeck(p2.getName() + ": " + this.name, this.ctype, tmp));
 		
 	}
-
-	public void addCards(ArrayList<AbstractCard> list) {
+	
+	/**
+	 * Adds a list of AbstractCards to the deck
+	 * @param list ArrayList<AbstractCard> to be added.
+	 */
+	public void addCards(List<AbstractCard> list) {
 		this.deck.addAll(list);
+	}
+	
+	/**
+	 * Clears the card collection.
+	 */
+	public void clear() {
+		this.deck.clear();
 	}
 }

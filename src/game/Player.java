@@ -41,6 +41,14 @@ public class Player {
 		this.tmp_deck = new CardDeck(curr.getName(), curr.getType());
 	}
 	
+	public CardDeck getCurrentDeck() {
+		return current_deck;
+	}
+	
+	public CardDeck getUsedDeck() {
+		return current_deck;
+	}
+	
 	public AbstractCard top() {
 		if (current_deck.isEmpty()) {
 			used_deck.shuffle();

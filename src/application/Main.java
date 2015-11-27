@@ -19,8 +19,9 @@ public class Main {
 		
 		GameCriterion gCrit = new GameCriterionBigger();
 		CardDeck filedeck = CardDeckFactory.fromFile("decks/DeckTest1.xml");
-		Game g = new Game(p1, p2, filedeck, gCrit);
-		g.start();
+//		System.out.println(filedeck);
+//		Game g = new Game(p1, p2, filedeck, gCrit);
+//		g.start();
 		
 	}	
 }
