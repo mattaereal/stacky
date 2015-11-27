@@ -1,5 +1,7 @@
 package game;
 
+import java.util.ArrayList;
+
 import cards.AbstractCard;
 import cards.CardDeck;
 
@@ -10,6 +12,7 @@ public class Player {
 	private CardDeck current_deck;
 	private CardDeck used_deck;
 	private CardDeck tmp_deck;
+	private ArrayList<AbstractCard> feedback;
 	
 	public Player(String name, GameStrategy strat) {
 		this.setName(name);
@@ -62,17 +65,49 @@ public class Player {
 	public void saveCard(AbstractCard card) {
 		this.used_deck.addCard(card);
 	}
-	
-	public void saveCards(AbstractCard c1, AbstractCard c2) {
-		saveCard(c1);
-		saveCard(c2);
-	}
 
 	public String selectAttribute() {
-//		return this.gStrategy.getAttribute();
-		return null;
+		return this.gStrategy.getAttribute(current_deck.getType(), feedback);
+	}
+
+	@Override
+    public int hashCode() {
+        final int prime = 37;
+        int result = 1;
+        result = prime * result
+                + this.name.hashCode();
+        return result;
+    }
+    
+    @Override
+    public boolean equals(final Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        final Player other = (Player) obj;
+		if (!this.name.equals(other.name))
+			return false;
+		if (!this.current_deck.equals(other.current_deck))
+			return false;
+		if (!this.gStrategy.equals(other.gStrategy))
+			return false;
+		
+		return true;
+    }
+
+	public void saveCards(ArrayList<AbstractCard> pile) {
+		this.used_deck.addCards(pile);
+	}
+
+	public void setFeedback(ArrayList<AbstractCard> feedback) {
+		this.feedback = feedback;
 	}
 	
-	
+	public ArrayList<AbstractCard> getFeedback() {
+		return this.feedback;
+	}
 
 }

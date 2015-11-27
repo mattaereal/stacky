@@ -15,6 +15,11 @@ public class CardDeck {
 	private CardType ctype;
 	private String name;
 
+	/**
+	 * 
+	 * @param name
+	 * @param type
+	 */
 	public CardDeck(String name, CardType type) {
 		this.deck = new ArrayList<AbstractCard>();
 		this.setName(name);
@@ -31,10 +36,15 @@ public class CardDeck {
 		if (card.getCtype().equals(this.ctype)) {
 			this.deck.add(card);
 		} else {
-			throw new RuntimeException("Adding a card to deck with different CardType.");
+			throw new RuntimeException("Adding a card to deck with a different CardType.");
 		}
 	}
 	
+	/**
+	 * Deletes the first occurrence of a card by its name
+	 * from the current deck.
+	 * @param name The name of the card to be removed.
+	 */
 	public void delCard(String name) {
 		/* Deletes the first occurrence */
 		name = Stuff.capitalize(name);
@@ -141,7 +151,7 @@ public class CardDeck {
 	}
 
 	/**
-	 * @param name the name to set
+	 * @param name The name to be set.
 	 */
 	public void setName(String name) {
 		this.name = name;
@@ -179,4 +189,7 @@ public class CardDeck {
 		
 	}
 
+	public void addCards(ArrayList<AbstractCard> list) {
+		this.deck.addAll(list);
+	}
 }

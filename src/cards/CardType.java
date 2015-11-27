@@ -1,5 +1,6 @@
 package cards;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
@@ -57,4 +58,25 @@ public class CardType {
 		
 		return true;
 	}
+	
+	public int size() {
+		
+		return attrs.size();
+	}
+	
+	public boolean isEmpty() {
+		
+		return attrs.isEmpty();
+	}
+	
+	public Object[] toArray() {
+		
+		return attrs.toArray();
+	}
+	
+	public Set<String> getAttrs() {
+		
+		return this.attrs;
+	}
+
 }
