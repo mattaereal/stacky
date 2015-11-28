@@ -23,8 +23,6 @@ public class Game {
 		this.pile = new ArrayList<AbstractCard>();
 		this.tie = false;
 		this.feedback = new ArrayList<AbstractCard>();
-		this.p1.setFeedback(this.feedback);
-		this.p2.setFeedback(this.feedback);
 	}
 	
 	/**
@@ -100,9 +98,9 @@ public class Game {
 		
 		if (!this.tie) {
 			if (turn.equals(p1)) {
-				attribute = p1.selectAttribute();
+				attribute = p1.selectAttribute(feedback);
 			} else {
-				attribute = p2.selectAttribute();
+				attribute = p2.selectAttribute(feedback);
 			}
 		}		
 

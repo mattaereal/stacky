@@ -4,6 +4,8 @@ package application;
 
 import cards.*;
 import game.*;
+import game.strategies.GameStrategy;
+import game.strategies.RandomStrategy;
 
 
 public class Main {

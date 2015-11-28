@@ -11,9 +11,9 @@ import cards.Card;
 import cards.CardDeck;
 import cards.CardType;
 import cards.CompositeCard;
-import game.GameStrategy;
 import game.Player;
-import game.RandomStrategy;
+import game.strategies.GameStrategy;
+import game.strategies.RandomStrategy;
 
 public class CardDeckTest {
 
