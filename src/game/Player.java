@@ -212,4 +212,8 @@ public class Player {
 	public ArrayList<AbstractCard> getFeedback() {
 		return this.feedback;
 	}
+	
+	public String toString() {
+		return "Player: " + this.getName();
+	}
 }

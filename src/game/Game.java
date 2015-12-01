@@ -54,10 +54,14 @@ public class Game {
 		showWinner();
 	}
 	
+	public Player getWinner() {
+		return this.winner;
+	}
+	
 	/**
 	 * Plays ...
 	 */
-	private void play() {
+	private void play() throws RuntimeException {
 		int min = 0;
 		int max = 100;
 		int rand = min + (int)(Math.random() * ((max - min) + 1));
@@ -76,11 +80,11 @@ public class Game {
 		}	
 		
 		if (p1.hasCards()) {
-			winner = p1;
+			this.winner = p1;
 		} else if (p2.hasCards()) {
-			winner = p2;
+			this.winner = p2;
 		} else {
-			System.out.println("Something happened @ play.");
+			throw new RuntimeException("Something happened @ game play.");
 		}
 		
 	}
@@ -93,47 +97,51 @@ public class Game {
 	 * @param gc GameCriterion to use in each hand.
 	 * @return Returns the Player that won the hand.
 	 */
-	private Player hand(Player turn, Player p1, Player p2, GameCriterion gc) {
+	public Player hand(Player turn, Player p1, Player p2, GameCriterion gc) throws RuntimeException {
 		AbstractCard c1 = p1.top();
 		AbstractCard c2 = p2.top();
 		int result = 0;
 		
 		if (!this.tie) {
 			if (turn.equals(p1)) {
+				System.out.println(p1 + " selects attribute.");
 				attribute = p1.selectAttribute(c1);
 			} else {
+				System.out.println(p2 + " selects attribute.");
 				attribute = p2.selectAttribute(c2);
 			}
 		}		
 
 		result = gc.fight(c1, c2, attribute);
+		tiePool.add(c1);
+		tiePool.add(c2);
 		
 		if (result == GameCriterion.P1) {
+			System.out.println("Pool cards won by " + p1);
 			p1.saveCards(tiePool);
 			tiePool.clear();
 			this.tie = false;
 			return p1;
 		} else if (result == GameCriterion.P2) {
+			System.out.println("Pool cards won by " + p2);
 			p2.saveCards(tiePool);
 			tiePool.clear();
 			this.tie = false;
 			return p2;
-		} else if (result == GameCriterion.EE) {
+		} else if (result == GameCriterion.EQ) {
+			System.out.println("Cards added to pool since tie.");
 			this.tie = true;
-			tiePool.add(c1);
-			tiePool.add(c2);
-			return turn;
-		} else {
-			System.out.println("Something happened @ hand");
 			return turn;
 		}
+			
+		throw new RuntimeException("Something happened @ hand");
 	}
 	
 	/**
 	 * Shows the winner of the game.
 	 */
 	private void showWinner() {
-		System.out.println(winner);
+		System.out.println("Winner: " + winner);
 	}
 	
    @Override

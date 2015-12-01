@@ -20,7 +20,7 @@ public class RandomStrategy extends PlayerStrategy {
 		    	ret = attr;
 		    i = i + 1;
 		}
-		
+
 		return ret; //chequear si alguna vez llega acá
 	}
 }

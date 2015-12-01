@@ -175,10 +175,5 @@ public class PlayerTest {
 		assertTrue(p1.equals(p2));
 		assertTrue(p1.equals(p3));
 	}
-	
-//	@Test
-//	public void testSelectAttribute() {
-//		
-//	}
 
 }
