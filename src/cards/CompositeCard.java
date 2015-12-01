@@ -1,6 +1,7 @@
 package cards;
 
 import java.util.ArrayList;
+import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.List;
 
@@ -93,6 +94,14 @@ public class CompositeCard extends AbstractCard {
 		} else {
 			super.init();
 		}
+	}
+
+	@Override
+	public Object clone() {
+		CompositeCard newCard = new CompositeCard(name, ctype);
+		newCard.attrs = new Hashtable<String, Integer> (this.attrs);
+		newCard.cards = new ArrayList<AbstractCard> (this.cards);
+		return newCard;
 	}
 	
 

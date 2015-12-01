@@ -158,7 +158,7 @@ public class CardDeck {
 			return false;
 		if (!this.name.equals(other.name))
 			return false;
-	    if (other.getDeck().size() != this.getDeck().size())
+	    if (other.deck.size() != this.deck.size())
 	    	return false;
 	    
 	    Collections.sort(deck, new CardComparator());
@@ -273,5 +273,16 @@ public class CardDeck {
 	 */
 	public void clear() {
 		this.deck.clear();
+	}
+	
+	public Object clone() {
+		return new CardDeck(name, ctype, cloneList());
+	}
+	
+	private ArrayList<AbstractCard> cloneList() {
+	    ArrayList<AbstractCard> clone = new ArrayList<AbstractCard>(deck.size());
+	    for(AbstractCard card: deck) 
+	    	clone.add((AbstractCard) card.clone());
+	    return clone;
 	}
 }

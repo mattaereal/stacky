@@ -8,9 +8,9 @@ import utils.Stuff;
 
 public abstract class AbstractCard {
 	
-	private String name;
+	protected String name;
 	private String imagePath;
-	private CardType ctype;
+	protected CardType ctype;
 	private static final Integer empty = 0;
 	protected Hashtable<String, Integer> attrs;
 	
@@ -102,6 +102,13 @@ public abstract class AbstractCard {
 		
 		return true;
     }
+    
+    @Override
+    public String toString() {
+    	return this.name;
+    }
+    
+    public abstract Object clone();
     
 }
 

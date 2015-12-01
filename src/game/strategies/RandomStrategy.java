@@ -5,22 +5,22 @@ import java.util.Random;
 import java.util.Set;
 
 import cards.AbstractCard;
-import cards.CardType;
 
-public class RandomStrategy extends GameStrategy {
+public class RandomStrategy extends PlayerStrategy {
 
 	@Override
-	public String getAttribute(CardType cardType, ArrayList<AbstractCard> feedback) {
-		Set<String> attrs = cardType.getAttrs();
+	public String getAttribute(AbstractCard current, ArrayList<AbstractCard> feedback) {
+		Set<String> attrs = current.getCtype().getAttrs();
 		int size = attrs.size();
 		int item = new Random().nextInt(size); //cambiar por otro mecanismo
 		int i = 0;
+		String ret = null;
 		for(String attr : attrs) {
 		    if (i == item)
-		        return attr;
+		    	ret = attr;
 		    i = i + 1;
 		}
 		
-		return null; //chequear si alguna vez llega acá
+		return ret; //chequear si alguna vez llega acá
 	}
 }

@@ -10,7 +10,7 @@ public class Game {
 	protected CardDeck deck;
 	protected Player p1, p2, winner;
 	protected GameCriterion gcrit;
-	private ArrayList<AbstractCard> pile;
+	private ArrayList<AbstractCard> tiePool;
 	private String attribute;
 	private boolean tie;
 	private ArrayList<AbstractCard> feedback; //hacer otra clase con más información
@@ -20,15 +20,17 @@ public class Game {
 		this.gcrit = gCrit;
 		this.p1 = p1;
 		this.p2 = p2;
-		this.pile = new ArrayList<AbstractCard>();
-		this.tie = false;
+		this.tiePool = new ArrayList<AbstractCard>();
 		this.feedback = new ArrayList<AbstractCard>();
+		this.tie = false;
 	}
 	
 	/**
 	 * Deals cards.
 	 */
 	public void setup() {
+		p1.setFeedback(feedback);
+		p2.setFeedback(feedback);
 		deal();
 	}
 	
@@ -98,28 +100,28 @@ public class Game {
 		
 		if (!this.tie) {
 			if (turn.equals(p1)) {
-				attribute = p1.selectAttribute(feedback);
+				attribute = p1.selectAttribute(c1);
 			} else {
-				attribute = p2.selectAttribute(feedback);
+				attribute = p2.selectAttribute(c2);
 			}
 		}		
 
 		result = gc.fight(c1, c2, attribute);
 		
 		if (result == GameCriterion.P1) {
-			p1.saveCards(pile);
-			pile.clear();
+			p1.saveCards(tiePool);
+			tiePool.clear();
 			this.tie = false;
 			return p1;
 		} else if (result == GameCriterion.P2) {
-			p2.saveCards(pile);
-			pile.clear();
+			p2.saveCards(tiePool);
+			tiePool.clear();
 			this.tie = false;
 			return p2;
 		} else if (result == GameCriterion.EE) {
 			this.tie = true;
-			pile.add(c1);
-			pile.add(c2);
+			tiePool.add(c1);
+			tiePool.add(c2);
 			return turn;
 		} else {
 			System.out.println("Something happened @ hand");
@@ -143,6 +145,7 @@ public class Game {
         if (getClass() != obj.getClass())
             return false;
         final Game other = (Game) obj;
+
 		if (!this.deck.equals(other.deck))
 			return false;
 		if (!this.gcrit.equals(other.gcrit))

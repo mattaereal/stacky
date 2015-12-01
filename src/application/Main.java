@@ -4,7 +4,7 @@ package application;
 
 import cards.*;
 import game.*;
-import game.strategies.GameStrategy;
+import game.strategies.PlayerStrategy;
 import game.strategies.RandomStrategy;
 
 
@@ -13,7 +13,7 @@ public class Main {
 	public static void main(String[] args) {
 		
 //		GameStrategy interactive = new InteractiveStrategy();
-		GameStrategy random = new RandomStrategy();
+		PlayerStrategy random = new RandomStrategy();
 		
 //		Player p1 = new Player("Matt", interactive); //Se pregunta por prompt (user)
 		Player p1 = new Player("CPU2", random);

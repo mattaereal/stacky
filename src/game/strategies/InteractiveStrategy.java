@@ -3,12 +3,11 @@ package game.strategies;
 import java.util.ArrayList;
 
 import cards.AbstractCard;
-import cards.CardType;
 
-public class InteractiveStrategy extends GameStrategy {
+public class InteractiveStrategy extends PlayerStrategy {
 
 	@Override
-	public String getAttribute(CardType cardType, ArrayList<AbstractCard> feedback) {
+	public String getAttribute(AbstractCard current, ArrayList<AbstractCard> feedback) {
 		// TODO Auto-generated method stub
 		return null;
 	}

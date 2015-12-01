@@ -4,26 +4,39 @@ import java.util.ArrayList;
 
 import cards.AbstractCard;
 import cards.CardDeck;
-import game.strategies.GameStrategy;
+import game.strategies.PlayerStrategy;
 
 public class Player {
 	
 	private String name;
-	private GameStrategy gStrategy;
-	private CardDeck current_deck;
-	private CardDeck used_deck;
-	private CardDeck tmp_deck;
+	private PlayerStrategy gStrategy;
+	private CardDeck current_deck = null;
+	private CardDeck used_deck = null;
+	private CardDeck tmp_deck = null;
+	private ArrayList<AbstractCard> feedback;
 	
 	/**
 	 * Class that represents a card Player.
 	 * @param name Name of the player.
 	 * @param strat Strategy that will be used to play.
 	 */
-	public Player(String name, GameStrategy strat) {
+	public Player(String name, PlayerStrategy strat) {
 		this.setName(name);
 		this.setgStrategy(strat);
 	}
 
+	/**
+	 * Class that represents a card Player.
+	 * @param name Name of the player.
+	 * @param strat Strategy that will be used to play.
+	 * @param curr CardDeck that the player will be using.
+	 */
+	public Player(String name, PlayerStrategy strat, CardDeck curr) {
+		this.setName(name);
+		this.setgStrategy(strat);
+		this.setDeck(curr);
+	}
+	
 	/**
 	 * Returns the name of the player.
 	 * @return Name of the player.
@@ -44,7 +57,7 @@ public class Player {
 	 * Get the strategy set by the player.
 	 * @return Current GameStrategy.
 	 */
-	public GameStrategy getgStrategy() {
+	public PlayerStrategy getgStrategy() {
 		return gStrategy;
 	}
 
@@ -52,7 +65,7 @@ public class Player {
 	 * Set the Game Strategy to be used by the player.
 	 * @param gStrategy
 	 */
-	public void setgStrategy(GameStrategy gStrategy) {
+	public void setgStrategy(PlayerStrategy gStrategy) {
 		this.gStrategy = gStrategy;
 	}
 	
@@ -65,7 +78,7 @@ public class Player {
 	 * @param curr The deck that the player will use.
 	 */
 	public void setDeck(CardDeck curr) {
-		this.current_deck = curr;
+		this.current_deck = (CardDeck) curr.clone();
 		this.used_deck = new CardDeck(curr.getName(), curr.getType());
 		this.tmp_deck = new CardDeck(curr.getName(), curr.getType());
 	}
@@ -94,14 +107,18 @@ public class Player {
 	 * @return The top card of player's cards.
 	 */
 	public AbstractCard top() {
-		if (current_deck.isEmpty()) {
-			used_deck.shuffle();
-			tmp_deck = current_deck;
-			current_deck = used_deck;
-			used_deck = tmp_deck;
+		if (hasCards()) {
+			if (current_deck.isEmpty()) {
+				used_deck.shuffle();
+				tmp_deck = current_deck;
+				current_deck = used_deck;
+				used_deck = tmp_deck;
+			}
+			
+			return current_deck.pop();
 		}
 		
-		return current_deck.pop();
+		return null;
 	}
 	
 	/**
@@ -111,11 +128,13 @@ public class Player {
 	 * , false otherwise.
 	 */
 	public boolean hasCards() {
-		
-		if (current_deck.isEmpty() && used_deck.isEmpty()) {
+		if (current_deck == null)
 			
 			return false;
-		}
+		
+		if (current_deck.isEmpty() && used_deck.isEmpty())
+			
+			return false;
 		
 		return true;
 	}
@@ -140,8 +159,8 @@ public class Player {
 	 * Selects an attribute based on the strategy.
 	 * @return An attribute.
 	 */
-	public String selectAttribute(ArrayList<AbstractCard> feedback) {
-		return this.gStrategy.getAttribute(current_deck.getType(), feedback);
+	public String selectAttribute(AbstractCard current) {
+		return this.gStrategy.getAttribute(current, feedback);
 	}
 
 	/**
@@ -186,4 +205,11 @@ public class Player {
 		return true;
     }
 
+	public void setFeedback(ArrayList<AbstractCard> feedback) {
+		this.feedback = feedback;
+	}
+	
+	public ArrayList<AbstractCard> getFeedback() {
+		return this.feedback;
+	}
 }
