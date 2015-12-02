@@ -34,4 +34,9 @@ public class GameRecord {
 		return "Game record for " + this.p1 + " vs " + this.p2 + 
 				". Using the deck " + this.deck.getName();
 	}
+
+	public CardDeck getDeck() {
+		
+		return deck;
+	}
 }
