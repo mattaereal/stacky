@@ -10,13 +10,13 @@ import cards.CardDeck;
 import cards.CardType;
 import game.Player;
 import game.strategies.PlayerStrategy;
-import game.strategies.RandomStrategy;
+import game.strategies.PlayerRandomStrategy;
 
 public class PlayerTest {
 
 	@Test
 	public void testTopSave() {
-		PlayerStrategy gstrat = new RandomStrategy();
+		PlayerStrategy gstrat = new PlayerRandomStrategy();
 		Player p1 = new Player("Matt", gstrat);
 		AbstractCard c = p1.top();
 		assertNull(c);
@@ -166,8 +166,8 @@ public class PlayerTest {
 
 	@Test
 	public void testEqualsObject() {
-		PlayerStrategy gstrat = new RandomStrategy();
-		PlayerStrategy gstrat2 = new RandomStrategy();
+		PlayerStrategy gstrat = new PlayerRandomStrategy();
+		PlayerStrategy gstrat2 = new PlayerRandomStrategy();
 		Player p1 = new Player("Matt", gstrat);
 		Player p2 = new Player("Matt", gstrat);
 		Player p3 = new Player("Matt", gstrat2);

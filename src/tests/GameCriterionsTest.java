@@ -1,4 +1,4 @@
-package game;
+package tests;
 
 import static org.junit.Assert.*;
 
@@ -8,8 +8,12 @@ import cards.AbstractCard;
 import cards.Card;
 import cards.CardDeck;
 import cards.CardType;
+import game.Game;
+import game.GameCriterion;
+import game.GameCriterionBigger;
+import game.Player;
 import game.strategies.PlayerStrategy;
-import game.strategies.RandomStrategy;
+import game.strategies.PlayerRandomStrategy;
 
 public class GameCriterionsTest {
 
@@ -66,7 +70,7 @@ public class GameCriterionsTest {
 		
 
 		GameCriterion gCrit = new GameCriterionBigger();
-		PlayerStrategy gstrat = new RandomStrategy();
+		PlayerStrategy gstrat = new PlayerRandomStrategy();
 		Player p1 = new Player("CPU1", gstrat);
 		Player p2 = new Player("CPU2", gstrat);
 		Game game = new Game(p1, p2, deck, gCrit);
@@ -97,7 +101,7 @@ public class GameCriterionsTest {
 		result != GameCriterion.P2) {
 			fail("Player two must have won.");
 		} else if ((c1.getAttribute(attribute).equals(c2.getAttribute(attribute))) &&
-		result != GameCriterion.P2) {
+		result != GameCriterion.EQ) {
 			fail("There should be a tie.");
 		}
 	}

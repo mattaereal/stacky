@@ -1,18 +1,18 @@
 package game.strategies;
 
-import java.util.ArrayList;
 import java.util.Random;
 import java.util.Set;
 
 import cards.AbstractCard;
+import game.GameRecord;
 
-public class RandomStrategy extends PlayerStrategy {
+public class PlayerRandomStrategy extends PlayerStrategy {
 
 	@Override
-	public String getAttribute(AbstractCard current, ArrayList<AbstractCard> feedback) {
+	public String getAttribute(AbstractCard current, GameRecord feedback) {
 		Set<String> attrs = current.getCtype().getAttrs();
 		int size = attrs.size();
-		int item = new Random().nextInt(size); //cambiar por otro mecanismo
+		int item = new Random().nextInt(size);
 		int i = 0;
 		String ret = null;
 		for(String attr : attrs) {
@@ -21,6 +21,6 @@ public class RandomStrategy extends PlayerStrategy {
 		    i = i + 1;
 		}
 
-		return ret; //chequear si alguna vez llega acá
+		return ret;
 	}
 }

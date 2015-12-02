@@ -1,6 +1,6 @@
 package utils;
 
-public final class Stuff {
+public final class Util {
 
 	public static String capitalize(String str) {
 	    if (str.length() == 0) {

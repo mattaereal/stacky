@@ -1,10 +1,9 @@
 package game.strategies;
 
-import java.util.ArrayList;
-
 import cards.AbstractCard;
+import game.GameRecord;
 
 public abstract class PlayerStrategy {
 
-	public abstract String getAttribute(AbstractCard current, ArrayList<AbstractCard> feedback);
+	public abstract String getAttribute(AbstractCard current, GameRecord feedback);
 }

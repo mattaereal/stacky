@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import cards.AbstractCard;
 import cards.CardDeck;
 import game.strategies.PlayerStrategy;
+import utils.Util;
 
 public class Player {
 	
@@ -13,7 +14,7 @@ public class Player {
 	private CardDeck current_deck = null;
 	private CardDeck used_deck = null;
 	private CardDeck tmp_deck = null;
-	private ArrayList<AbstractCard> feedback;
+	private GameRecord feedback;
 	
 	/**
 	 * Class that represents a card Player.
@@ -189,7 +190,7 @@ public class Player {
         if (getClass() != obj.getClass())
             return false;
         final Player other = (Player) obj;
-		if (!this.name.equals(other.name))
+		if (!Util.capitalize(this.name).equals(Util.capitalize(other.name)))
 			return false;
 		if ((this.current_deck != null && other.current_deck != null)) {
 			if (!this.current_deck.equals(other.current_deck))
@@ -205,11 +206,11 @@ public class Player {
 		return true;
     }
 
-	public void setFeedback(ArrayList<AbstractCard> feedback) {
-		this.feedback = feedback;
+	public void setFeedback(GameRecord gameRecord) {
+		this.feedback = gameRecord;
 	}
 	
-	public ArrayList<AbstractCard> getFeedback() {
+	public GameRecord getFeedback() {
 		return this.feedback;
 	}
 	

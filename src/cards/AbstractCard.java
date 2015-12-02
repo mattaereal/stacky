@@ -4,7 +4,7 @@ import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.Set;
 
-import utils.Stuff;
+import utils.Util;
 
 public abstract class AbstractCard {
 	
@@ -47,16 +47,15 @@ public abstract class AbstractCard {
 	
 	public Integer getAttribute(String name) {
 		
-		return attrs.get(Stuff.capitalize(name));
+		return attrs.get(Util.capitalize(name));
 	}
 	
-	public void addAttribute(String key, Integer value) {
-		key = Stuff.capitalize(key);
+	public void addAttribute(String key, Integer value) throws RuntimeException {
+		key = Util.capitalize(key);
 		if (this.ctype.contains(key)) {
 			this.attrs.put(key, value);
 		} else {
-			//Print error key?
-			System.out.println("Adding an attribute that is not supported by CardType.");
+			throw new RuntimeException("Adding an attribute that is not supported by CardType.");
 		}
 	}
 	
@@ -89,7 +88,7 @@ public abstract class AbstractCard {
         final AbstractCard other = (AbstractCard) obj;
 		if (!this.ctype.equals(other.getCtype()))
 			return false;
-		if (!this.name.equals(other.name))
+		if (!Util.capitalize(this.name).equals(Util.capitalize(other.name)))
 			return false;
 		
 		Iterator<String> it = this.getCtype().iterator();

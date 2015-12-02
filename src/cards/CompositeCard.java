@@ -5,7 +5,7 @@ import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.List;
 
-import utils.Stuff;
+import utils.Util;
 
 public class CompositeCard extends AbstractCard {
 	private List<AbstractCard> cards;
@@ -30,25 +30,23 @@ public class CompositeCard extends AbstractCard {
 		return super.getAttribute(name);
 	}
 
-	public void addCard(AbstractCard card) {
+	public void addCard(AbstractCard card) throws RuntimeException {
 		if (card.getCtype().equals(this.getCtype())) {
 			this.cards.add(card);
 			update = true;
 		} else {
-			System.out.println("Adding a card that has a different CardType.");
+			throw new RuntimeException("Adding a card that has a different CardType.");
 		}
 	}
 	
 	public void delCard(String name) {
 		/* Deletes the first occurrence */
-		name = Stuff.capitalize(name);
+		name = Util.capitalize(name);
 		AbstractCard curr;
 		Iterator<AbstractCard> it = this.cards.iterator();
 		while (it.hasNext()) {
-			curr = it.next();
-			System.out.println(curr.getName());
-			
-			if (name.equals(Stuff.capitalize(curr.getName()))) {
+			curr = it.next();			
+			if (name.equals(Util.capitalize(curr.getName()))) {
 				delCard(curr);
 				return;
 			}

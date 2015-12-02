@@ -1,19 +1,21 @@
 package game;
 
 import java.util.ArrayList;
+import java.util.logging.Logger;
 
+import application.Main;
 import cards.AbstractCard;
 import cards.CardDeck;
 
 public class Game {
-	
+	static Logger logger = Logger.getLogger(Main.class.getName());
 	protected CardDeck deck;
 	protected Player p1, p2, winner;
 	protected GameCriterion gcrit;
 	private ArrayList<AbstractCard> tiePool;
 	private String attribute;
 	private boolean tie;
-	private ArrayList<AbstractCard> feedback; //hacer otra clase con más información
+	private GameRecord gameRecord;
 	
 	public Game(Player p1, Player p2, CardDeck cd, GameCriterion gCrit) {
 		this.deck = cd;
@@ -21,7 +23,7 @@ public class Game {
 		this.p1 = p1;
 		this.p2 = p2;
 		this.tiePool = new ArrayList<AbstractCard>();
-		this.feedback = new ArrayList<AbstractCard>();
+		this.gameRecord = new GameRecord(p1, p2, cd);
 		this.tie = false;
 	}
 	
@@ -29,8 +31,8 @@ public class Game {
 	 * Deals cards.
 	 */
 	public void setup() {
-		p1.setFeedback(feedback);
-		p2.setFeedback(feedback);
+		p1.setFeedback(gameRecord);
+		p2.setFeedback(gameRecord);
 		deal();
 	}
 	
@@ -104,10 +106,10 @@ public class Game {
 		
 		if (!this.tie) {
 			if (turn.equals(p1)) {
-				System.out.println(p1 + " selects attribute.");
+				logger.info(p1 + " selects attribute.");
 				attribute = p1.selectAttribute(c1);
 			} else {
-				System.out.println(p2 + " selects attribute.");
+				logger.info(p2 + " selects attribute.");
 				attribute = p2.selectAttribute(c2);
 			}
 		}		
@@ -117,24 +119,28 @@ public class Game {
 		tiePool.add(c2);
 		
 		if (result == GameCriterion.P1) {
-			System.out.println("Pool cards won by " + p1);
+			logger.info("Pool cards won by " + p1);
 			p1.saveCards(tiePool);
 			tiePool.clear();
 			this.tie = false;
-			return p1;
+			turn = p1;
 		} else if (result == GameCriterion.P2) {
-			System.out.println("Pool cards won by " + p2);
+			logger.info("Pool cards won by " + p2);
 			p2.saveCards(tiePool);
 			tiePool.clear();
 			this.tie = false;
-			return p2;
+			turn = p2;
 		} else if (result == GameCriterion.EQ) {
-			System.out.println("Cards added to pool since tie.");
+			logger.info("Cards added to pool since tie.");
 			this.tie = true;
-			return turn;
+		} else {
+			throw new RuntimeException("Something happened @ hand");
 		}
-			
-		throw new RuntimeException("Something happened @ hand");
+		
+		this.gameRecord.addHand(c1, c2, turn, attribute);
+		
+		return turn;
+		
 	}
 	
 	/**

@@ -6,11 +6,15 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.logging.Logger;
 
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.StaxDriver;
 
+import application.Main;
+
 public class CardDeckFactory {
+	static Logger logger = Logger.getLogger(Main.class.getName());
 	private static BufferedReader br;
 	
 	public static CardDeck fromFile(String path) {
@@ -25,7 +29,7 @@ public class CardDeckFactory {
 			}
 			
 			CardDeck deck = (CardDeck) xstream.fromXML(xml);
-			System.out.println("Deck loaded from" + path);
+			logger.info("Deck loaded from" + path);
 			return deck;
 		} catch (IOException e) {
 			e.printStackTrace();

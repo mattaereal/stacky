@@ -13,7 +13,7 @@ import cards.CardType;
 import cards.CompositeCard;
 import game.Player;
 import game.strategies.PlayerStrategy;
-import game.strategies.RandomStrategy;
+import game.strategies.PlayerRandomStrategy;
 
 public class CardDeckTest {
 
@@ -310,7 +310,7 @@ public class CardDeckTest {
 		deck.addCard(IceMan);
 		deck.addCard(Cyclops);
 		
-		PlayerStrategy random = new RandomStrategy();
+		PlayerStrategy random = new PlayerRandomStrategy();
 		Player p1 = new Player("matt", random);
 		Player p2 = new Player("cpu", random);
 		

@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Random;
 
 import game.Player;
-import utils.Stuff;
+import utils.Util;
 
 public class CardDeck {
 	
@@ -63,12 +63,12 @@ public class CardDeck {
 	 */
 	public void delCard(String name) {
 		/* Deletes the first occurrence */
-		name = Stuff.capitalize(name);
+		name = Util.capitalize(name);
 		AbstractCard curr;
 		Iterator<AbstractCard> it = this.deck.iterator();
 		while (it.hasNext()) {
 			curr = it.next();
-			if (name.equals(Stuff.capitalize(curr.getName()))) {
+			if (name.equals(Util.capitalize(curr.getName()))) {
 				this.delCard(curr);
 				return;
 			}
@@ -131,10 +131,10 @@ public class CardDeck {
 	 * @return True if exists, False otherwise.
 	 */
 	public boolean exists(String name) {
-		name = Stuff.capitalize(name);
+		name = Util.capitalize(name);
 		Iterator<AbstractCard> it = this.deck.iterator();
 		while (it.hasNext()) {
-			if (it.next().getName().equals(name)) {
+			if (Util.capitalize(it.next().getName()).equals(name)) {
 				return true;
 			}
 		}
@@ -156,7 +156,7 @@ public class CardDeck {
         final CardDeck other = (CardDeck) obj;
 		if (!this.ctype.equals(other.ctype))
 			return false;
-		if (!this.name.equals(other.name))
+		if (!Util.capitalize(this.name).equals(Util.capitalize(other.name)))
 			return false;
 	    if (other.deck.size() != this.deck.size())
 	    	return false;

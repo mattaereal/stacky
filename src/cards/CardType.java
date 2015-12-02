@@ -1,11 +1,10 @@
 package cards;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
-import utils.Stuff;
+import utils.Util;
 
 
 public class CardType {
@@ -16,11 +15,11 @@ public class CardType {
 	}
 	
 	public void addAttribute(String newAttr) {
-		this.attrs.add(Stuff.capitalize(newAttr));
+		this.attrs.add(Util.capitalize(newAttr));
 	}
 	
 	public boolean contains(String key) {
-		key = Stuff.capitalize(key);
+		key = Util.capitalize(key);
 		return this.attrs.contains(key);
 	}
 	

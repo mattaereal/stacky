@@ -11,7 +11,7 @@ import cards.CompositeCard;
 
 public class AbstractCardTest {
 
-	@Test
+	@Test(expected = Exception.class) 
 	public void testAddAttribute() {
 		Integer r;
 		CardType superheroes = new CardType();
@@ -34,7 +34,6 @@ public class AbstractCardTest {
 	}
 	
 	@Test
-	
 	public void testGetAttribute() {
 		CardType superheroes = new CardType();
 		superheroes.addAttribute("Altura");
@@ -50,7 +49,7 @@ public class AbstractCardTest {
 		
 	}
 
-	@Test
+	@Test(expected = Exception.class) 
 	public void testEqualsObject() {
 		// Card
 		CardType cars = new CardType();

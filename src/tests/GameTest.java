@@ -1,4 +1,4 @@
-package game;
+package tests;
 
 import static org.junit.Assert.*;
 
@@ -9,8 +9,12 @@ import cards.Card;
 import cards.CardDeck;
 import cards.CardDeckFactory;
 import cards.CardType;
+import game.Game;
+import game.GameCriterion;
+import game.GameCriterionBigger;
+import game.Player;
 import game.strategies.PlayerStrategy;
-import game.strategies.RandomStrategy;
+import game.strategies.PlayerRandomStrategy;
 
 public class GameTest {
 
@@ -65,7 +69,7 @@ public class GameTest {
 		deck.addCard(Cyclops);
 		deck.addCard(WeakBeast);
 		
-		PlayerStrategy gstrat = new RandomStrategy();
+		PlayerStrategy gstrat = new PlayerRandomStrategy();
 		GameCriterion gcrit = new GameCriterionBigger();
 		Player p1 = new Player("CPU1", gstrat);
 		Player p2 = new Player("CPU2", gstrat);
@@ -132,7 +136,7 @@ public class GameTest {
 		deck.addCard(Cyclops);
 		deck.addCard(WeakBeast);
 		
-		PlayerStrategy gstrat = new RandomStrategy();
+		PlayerStrategy gstrat = new PlayerRandomStrategy();
 		GameCriterion gcrit = new GameCriterionBigger();
 		Player p1 = new Player("CPU1", gstrat);
 		Player p2 = new Player("CPU2", gstrat);
@@ -238,7 +242,7 @@ public class GameTest {
 		deck2.addCard(IceMan);
 		deck2.addCard(Beast);
 		
-		PlayerStrategy gstrat = new RandomStrategy();
+		PlayerStrategy gstrat = new PlayerRandomStrategy();
 		GameCriterion gcrit = new GameCriterionBigger();
 		Player p1 = new Player("CPU1", gstrat);
 		Player p2 = new Player("CPU2", gstrat);
@@ -254,7 +258,7 @@ public class GameTest {
 	
 	@Test
 	public void startTest() {
-		PlayerStrategy random = new RandomStrategy();
+		PlayerStrategy random = new PlayerRandomStrategy();
 		Player p1 = new Player("CPU-1", random);
 		Player p2 = new Player("CPU-2", random); //Siempre atrib aleatorio			
 		
