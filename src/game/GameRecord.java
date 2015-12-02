@@ -23,6 +23,11 @@ public class GameRecord {
 		this.records.add(new Record(c1, c2, turn, attrib));
 	}
 	
+	public ArrayList<Record> getRecordsList() {
+		
+		return this.records;
+	}
+	
 	@Override
 	public String toString() {
 		

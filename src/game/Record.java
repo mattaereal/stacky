@@ -20,7 +20,6 @@ public final class Record {
 		return card1;
 	}
 
-
 	public AbstractCard getCard2() {
 		return card2;
 	}
@@ -28,7 +27,6 @@ public final class Record {
 	public Player getPlayerTurn() {
 		return playerTurn;
 	}
-
 
 	public String getAttribute() {
 		return attribute;
