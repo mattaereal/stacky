@@ -4,7 +4,6 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import cards.AbstractCard;
 import cards.Card;
 import cards.CardType;
 import cards.CompositeCard;
@@ -19,13 +18,13 @@ public class CompositeCardTest {
 		cars.addAttribute("Kms");
 		cars.addAttribute("Año");
 		
-		AbstractCard card = new Card("Prueba", cars);
+		Card card = new Card("Prueba", cars);
 		card.addAttribute("RPM", 100);
 		card.addAttribute("Velocidad", 220);
 		card.addAttribute("Kms", 0);
 		card.addAttribute("Año", 2002);
 		
-		AbstractCard v8 = new Card("V8 Car", cars);
+		Card v8 = new Card("V8 Car", cars);
 		v8.addAttribute("RPM", 250);
 		v8.addAttribute("Velocidad", 200);
 		v8.addAttribute("Kms", 200);
@@ -66,13 +65,13 @@ public class CompositeCardTest {
 		cars.addAttribute("Kms");
 		cars.addAttribute("Año");
 		
-		AbstractCard card = new Card("Prueba", cars);
+		Card card = new Card("Prueba", cars);
 		card.addAttribute("RPM", 100);
 		card.addAttribute("Velocidad", 220);
 		card.addAttribute("Kms", 0);
 		card.addAttribute("Año", 2002);
 		
-		AbstractCard v8 = new Card("V8 Car", cars);
+		Card v8 = new Card("V8 Car", cars);
 		v8.addAttribute("RPM", 250);
 		v8.addAttribute("Velocidad", 200);
 		v8.addAttribute("Kms", 200);

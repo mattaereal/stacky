@@ -1,7 +1,7 @@
 package cards;
 
 import java.util.ArrayList;
-import java.util.Hashtable;
+
 import java.util.Iterator;
 import java.util.List;
 
@@ -64,18 +64,20 @@ public class CompositeCard extends AbstractCard {
 		this.cards.remove(card);
 	}
 
-	private void clearAttrs() {
-		this.attrs.clear();
-	}
-
 	@Override
 	public Object clone() {
 		CompositeCard newCard = new CompositeCard(name, ctype);
-		newCard.attrs = new Hashtable<String, Integer> (this.attrs);
 		newCard.cards = new ArrayList<AbstractCard> (this.cards);
 		return newCard;
 	}
-	
 
+	@Override
+	public void printAttributes() {
+		System.out.println("["+this.getName()+"]");
+		for(String key: this.ctype.getAttrs()) {
+			System.out.println(key+": "+this.getAttribute(key));
+		}
+		System.out.println();
+	}
 	
 }

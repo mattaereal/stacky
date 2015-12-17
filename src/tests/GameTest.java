@@ -4,8 +4,8 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import cards.AbstractCard;
 import cards.Card;
+import cards.CardDBHandler;
 import cards.CardDeck;
 import cards.CardDeckFactory;
 import cards.CardType;
@@ -27,35 +27,35 @@ public class GameTest {
 		superheroes.addAttribute("Peleas ganadas");
 		superheroes.addAttribute("Velocidad");
 		
-		AbstractCard Thor = new Card("Thor", superheroes);
+		Card Thor = new Card("Thor", superheroes);
 		Thor.addAttribute("Altura", 210);
 		Thor.addAttribute("Peso", 103);
 		Thor.addAttribute("Fuerza", 1100);
 		Thor.addAttribute("Peleas ganadas", 975);
 		Thor.addAttribute("Velocidad", 250);
 		
-		AbstractCard IceMan = new Card("Ice man", superheroes);
+		Card IceMan = new Card("Ice man", superheroes);
 		IceMan.addAttribute("Altura", 177);
 		IceMan.addAttribute("Peso", 65);
 		IceMan.addAttribute("Fuerza", 800);
 		IceMan.addAttribute("Peleas ganadas", 936);
 		IceMan.addAttribute("Velocidad", 100);
 		
-		AbstractCard Cyclops = new Card("Cyclops", superheroes);
+		Card Cyclops = new Card("Cyclops", superheroes);
 		Cyclops.addAttribute("Altura", 189);
 		Cyclops.addAttribute("Peso", 74);
 		Cyclops.addAttribute("Fuerza", 950);
 		Cyclops.addAttribute("Peleas ganadas", 936);
 		Cyclops.addAttribute("Velocidad", 130);
 		
-		AbstractCard Beast = new Card("Beast", superheroes);
+		Card Beast = new Card("Beast", superheroes);
 		Beast.addAttribute("Altura", 183);
 		Beast.addAttribute("Peso", 112);
 		Beast.addAttribute("Fuerza", 1000);
 		Beast.addAttribute("Peleas ganadas", 800);
 		Beast.addAttribute("Velocidad", 86);
 
-		AbstractCard WeakBeast = new Card("WeakBeast", superheroes);
+		Card WeakBeast = new Card("WeakBeast", superheroes);
 		WeakBeast.addAttribute("Altura", 183);
 		WeakBeast.addAttribute("Peso", 112);
 		WeakBeast.addAttribute("Fuerza", 200);
@@ -94,35 +94,35 @@ public class GameTest {
 		superheroes.addAttribute("Peleas ganadas");
 		superheroes.addAttribute("Velocidad");
 		
-		AbstractCard Thor = new Card("Thor", superheroes);
+		Card Thor = new Card("Thor", superheroes);
 		Thor.addAttribute("Altura", 210);
 		Thor.addAttribute("Peso", 103);
 		Thor.addAttribute("Fuerza", 1100);
 		Thor.addAttribute("Peleas ganadas", 975);
 		Thor.addAttribute("Velocidad", 250);
 		
-		AbstractCard IceMan = new Card("Ice man", superheroes);
+		Card IceMan = new Card("Ice man", superheroes);
 		IceMan.addAttribute("Altura", 177);
 		IceMan.addAttribute("Peso", 65);
 		IceMan.addAttribute("Fuerza", 800);
 		IceMan.addAttribute("Peleas ganadas", 936);
 		IceMan.addAttribute("Velocidad", 100);
 		
-		AbstractCard Cyclops = new Card("Cyclops", superheroes);
+		Card Cyclops = new Card("Cyclops", superheroes);
 		Cyclops.addAttribute("Altura", 189);
 		Cyclops.addAttribute("Peso", 74);
 		Cyclops.addAttribute("Fuerza", 950);
 		Cyclops.addAttribute("Peleas ganadas", 936);
 		Cyclops.addAttribute("Velocidad", 130);
 		
-		AbstractCard Beast = new Card("Beast", superheroes);
+		Card Beast = new Card("Beast", superheroes);
 		Beast.addAttribute("Altura", 183);
 		Beast.addAttribute("Peso", 112);
 		Beast.addAttribute("Fuerza", 1000);
 		Beast.addAttribute("Peleas ganadas", 800);
 		Beast.addAttribute("Velocidad", 86);
 
-		AbstractCard WeakBeast = new Card("WeakBeast", superheroes);
+		Card WeakBeast = new Card("WeakBeast", superheroes);
 		WeakBeast.addAttribute("Altura", 183);
 		WeakBeast.addAttribute("Peso", 112);
 		WeakBeast.addAttribute("Fuerza", 200);
@@ -193,35 +193,35 @@ public class GameTest {
 		superheroes.addAttribute("Peleas ganadas");
 		superheroes.addAttribute("Velocidad");
 		
-		AbstractCard Thor = new Card("Thor", superheroes);
+		Card Thor = new Card("Thor", superheroes);
 		Thor.addAttribute("Altura", 210);
 		Thor.addAttribute("Peso", 103);
 		Thor.addAttribute("Fuerza", 1100);
 		Thor.addAttribute("Peleas ganadas", 975);
 		Thor.addAttribute("Velocidad", 250);
 		
-		AbstractCard IceMan = new Card("Ice man", superheroes);
+		Card IceMan = new Card("Ice man", superheroes);
 		IceMan.addAttribute("Altura", 177);
 		IceMan.addAttribute("Peso", 65);
 		IceMan.addAttribute("Fuerza", 800);
 		IceMan.addAttribute("Peleas ganadas", 936);
 		IceMan.addAttribute("Velocidad", 100);
 		
-		AbstractCard Cyclops = new Card("Cyclops", superheroes);
+		Card Cyclops = new Card("Cyclops", superheroes);
 		Cyclops.addAttribute("Altura", 189);
 		Cyclops.addAttribute("Peso", 74);
 		Cyclops.addAttribute("Fuerza", 950);
 		Cyclops.addAttribute("Peleas ganadas", 936);
 		Cyclops.addAttribute("Velocidad", 130);
 		
-		AbstractCard Beast = new Card("Beast", superheroes);
+		Card Beast = new Card("Beast", superheroes);
 		Beast.addAttribute("Altura", 183);
 		Beast.addAttribute("Peso", 112);
 		Beast.addAttribute("Fuerza", 1000);
 		Beast.addAttribute("Peleas ganadas", 800);
 		Beast.addAttribute("Velocidad", 86);
 
-		AbstractCard WeakBeast = new Card("WeakBeast", superheroes);
+		Card WeakBeast = new Card("WeakBeast", superheroes);
 		WeakBeast.addAttribute("Altura", 183);
 		WeakBeast.addAttribute("Peso", 112);
 		WeakBeast.addAttribute("Fuerza", 200);
@@ -263,7 +263,7 @@ public class GameTest {
 		Player p2 = new Player("CPU-2", random); //Siempre atrib aleatorio			
 		
 		GameCriterion gCrit = new GameCriterionBigger();
-		CardDeck filedeck = CardDeckFactory.fromFile("decks/DeckTest1.xml");
+		CardDeck filedeck = CardDeckFactory.fromFileWithDB("db/decks/DeckTest1.xml", "db/cards/test.xml");
 		Game g = new Game(p1, p2, filedeck, gCrit);
 		g.start();
 		

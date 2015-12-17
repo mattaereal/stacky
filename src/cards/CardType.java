@@ -9,9 +9,15 @@ import utils.Util;
 
 public class CardType {
 	private Set<String> attrs;
+	private String name = "blank";
 	
 	public CardType() {
 		this.attrs = new HashSet<String>();
+	}
+	
+	public CardType(String name) {
+		this.attrs = new HashSet<String>();
+		this.name = name;
 	}
 	
 	public void addAttribute(String newAttr) {
@@ -77,5 +83,9 @@ public class CardType {
 		
 		return this.attrs;
 	}
-
+	
+	public String toString() {
+		
+		return this.name;
+	}
 }

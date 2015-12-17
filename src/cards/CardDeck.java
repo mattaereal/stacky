@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
+import java.util.UUID;
 
 import game.Player;
 import utils.Util;
@@ -12,6 +13,7 @@ import utils.Util;
 public class CardDeck {
 	
 	private List<AbstractCard> deck;
+	private List<UUID> deck_ids;
 	private CardType ctype;
 	private String name;
 
@@ -24,6 +26,7 @@ public class CardDeck {
 	 */
 	public CardDeck(String name, CardType type) {
 		this.deck = new ArrayList<AbstractCard>();
+		this.deck_ids = new ArrayList<UUID>();
 		this.setName(name);
 		this.ctype = type;
 	}
@@ -37,10 +40,23 @@ public class CardDeck {
 	 * @param tmp A card deck that is being set by a list
 	 * of abstract cards.
 	 */
-	protected CardDeck(String name, CardType ctype2, ArrayList<AbstractCard> tmp) {
+	protected CardDeck(String name, CardType ctype, ArrayList<AbstractCard> tmp) {
 		this.deck = tmp;
+		this.deck_ids = new ArrayList<UUID>();
 		this.setName(name);
-		this.ctype = ctype2;
+		this.ctype = ctype;
+	}
+	
+	/**
+	 * Loads the cards from the database based on their uuid.
+	 * @param cdh The database handler where to retrieve the
+	 * cards from.
+	 */
+	public void load(CardDBHandler cdh) {
+		Iterator<UUID> it = this.deck_ids.iterator();
+		while(it.hasNext()) {
+			this.deck.add(cdh.getCard(it.next()));
+		}
 	}
 
 	/**
@@ -51,6 +67,7 @@ public class CardDeck {
 	public void addCard(AbstractCard card) throws RuntimeException {
 		if (card.getCtype().equals(this.ctype)) {
 			this.deck.add(card);
+			this.deck_ids.add(card.getID());
 		} else {
 			throw new RuntimeException("Adding a card to deck with a different CardType.");
 		}
@@ -81,6 +98,7 @@ public class CardDeck {
 	 */
 	public void delCard(AbstractCard card) {
 		this.deck.remove(card);
+		this.deck_ids.remove(card.getID());
 	}
 
 	/**
@@ -275,6 +293,15 @@ public class CardDeck {
 		this.deck.clear();
 	}
 	
+	/**
+	 * Clears the card collection, and
+	 * also clears the ids representation.
+	 */
+	public void clearAll() {
+		this.clear();
+		this.deck_ids.clear();
+	}
+	
 	public Object clone() {
 		return new CardDeck(name, ctype, cloneList());
 	}
@@ -285,4 +312,12 @@ public class CardDeck {
 	    	clone.add((AbstractCard) card.clone());
 	    return clone;
 	}
+	
+	public void printCards() {
+		Iterator<AbstractCard> it = this.deck.iterator();
+		while(it.hasNext()) {
+			System.out.println(it.next());
+		}
+	}
+	
 }

@@ -5,17 +5,18 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import cards.Card;
+import cards.CardDBHandler;
+import cards.CardDBHandlerFactory;
 import cards.CardDeck;
 import cards.CardDeckFactory;
 import cards.CardType;
 import cards.CompositeCard;
 
-public class CardDeckFactoryTest {
+public class CardDBHandlerTest {
 
-	public void testFromAndToFile() {
-		//Old test.
-		
-		CardType superheroes = new CardType();
+	@Test
+	public void mainTest() {
+		CardType superheroes = new CardType("Superheroes");
 		superheroes.addAttribute("Altura");
 		superheroes.addAttribute("Peso");
 		superheroes.addAttribute("Fuerza");
@@ -139,6 +140,28 @@ public class CardDeckFactoryTest {
 		avengers.addCard(Hawkeye);
 		avengers.addCard(IronMan);
 		
+		CardDBHandler cdbh = new CardDBHandler();
+		cdbh.addCard(SilverSurfer);
+		cdbh.addCard(Hulk);
+		cdbh.addCard(Wonderwoman);
+		cdbh.addCard(Hulka);
+		cdbh.addCard(Beast);
+		cdbh.addCard(Cyclops);
+		cdbh.addCard(IceMan);
+		cdbh.addCard(Thor);
+		cdbh.addCard(SilverSurfer);
+		cdbh.addCard(Hawkeye);
+		cdbh.addCard(Storm);
+		cdbh.addCard(InvisibleWoman);
+		cdbh.addCard(HumanTorch);
+		cdbh.addCard(TheThing);
+		cdbh.addCard(MisterFantastic);
+		cdbh.addCard(f4);
+		cdbh.addCard(avengers);
+		
+		CardDBHandlerFactory.toFile("db/cards/test.xml", cdbh);
+		cdbh.printCards();
+		
 		CardDeck deck = new CardDeck("Superheroes #1", superheroes);
 		deck.addCard(SilverSurfer);
 		deck.addCard(Hulk);
@@ -159,9 +182,11 @@ public class CardDeckFactoryTest {
 		deck.addCard(avengers);
 		
 		assertTrue(CardDeckFactory.toFile("db/decks/DeckTest1.xml", deck));
-		
-		CardDeck filedeck = CardDeckFactory.fromFile("db/decks/DeckTest1.xml");
+		CardDeck filedeck = CardDeckFactory.fromFileWithDB("db/decks/DeckTest1.xml", "db/cards/test.xml" );
 		assertNotNull(filedeck);
+		deck.load(cdbh);
 		assertTrue(deck.equals(filedeck));
+		
 	}
+
 }

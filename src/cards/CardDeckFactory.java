@@ -17,6 +17,12 @@ public class CardDeckFactory {
 	static Logger logger = Logger.getLogger(Main.class.getName());
 	private static BufferedReader br;
 	
+	/**
+	 * Gathers from file a CardDeck. Also loads the cards.
+	 * 
+	 * @param path Where to retrieve the deck from.
+	 * @return CardDeck.
+	 */
 	public static CardDeck fromFile(String path) {
 		try {
 			XStream xstream = new XStream(new StaxDriver());
@@ -29,7 +35,40 @@ public class CardDeckFactory {
 			}
 			
 			CardDeck deck = (CardDeck) xstream.fromXML(xml);
-			logger.info("Deck loaded from" + path);
+			logger.info("Deck loaded from " + path);
+			CardDBHandler cdh = CardDBHandlerFactory.fromFile(); //hardcoded
+			deck.load(cdh);
+			return deck;
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+	
+	/**
+	 * Gathers from file a CardDeck. Also loads the cards from
+	 * specific  db. It's replicated code, but the inteded use
+	 * is mainly for tests.
+	 * 
+	 * @param path Where to retrieve the deck from.
+	 * @return CardDeck.
+	 */
+	public static CardDeck fromFileWithDB(String path, String db) {
+		try {
+			XStream xstream = new XStream(new StaxDriver());
+			br = new BufferedReader(new FileReader(path));
+			String xml = "";
+			String sCurrentLine;
+									
+			while ((sCurrentLine = br.readLine()) != null) {
+				xml += sCurrentLine+"\n";
+			}
+			
+			CardDeck deck = (CardDeck) xstream.fromXML(xml);
+			logger.info("Deck loaded from " + path);
+			CardDBHandler cdh = CardDBHandlerFactory.fromFile(db);
+			deck.load(cdh);
 			return deck;
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -38,8 +77,17 @@ public class CardDeckFactory {
 		return null;
 	}
 
+	/**
+	 * Saves a deck to an XML file. It also clears the
+	 * deck from any actual card, leaving just the uuids.
+	 * 
+	 * @param path Path where to be saved.
+	 * @param cd CardDeck to save.
+	 * @return True if it saved correctly. False otherwise.
+	 */
 	public static boolean toFile(String path, CardDeck cd) {
 		XStream xstream = new XStream(new StaxDriver());
+		cd.clear();
 		String xml = xstream.toXML(cd);
 		try {
 			File deckfile = new File(path);

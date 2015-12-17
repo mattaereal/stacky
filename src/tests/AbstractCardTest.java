@@ -17,7 +17,7 @@ public class AbstractCardTest {
 		CardType superheroes = new CardType();
 		superheroes.addAttribute("Altura");
 		
-		AbstractCard c = new Card("Test", superheroes);
+		Card c = new Card("Test", superheroes);
 		
 		c.addAttribute("Altura", 100);
 		r = c.getAttribute("Altura"); 
@@ -63,20 +63,20 @@ public class AbstractCardTest {
 		cars.addAttribute("Velocidad");
 		cars.addAttribute("Kms");
 		
-		AbstractCard card = new Card("Prueba", cars);
+		Card card = new Card("Prueba", cars);
 		card.addAttribute("RPM", 100);
 		card.addAttribute("Velocidad", 220);
 		card.addAttribute("Kms", 0);
 		card.addAttribute("Año", 2002);
 		
 		
-		AbstractCard card_other = new Card("Prueba", cars_other);
+		Card card_other = new Card("Prueba", cars_other);
 		card_other.addAttribute("RPM", 100);
 		card_other.addAttribute("Velocidad", 220);
 		card_other.addAttribute("Kms", 0);
 		card_other.addAttribute("Año", 2002);
 		
-		AbstractCard card_copy = new Card("Prueba", cars);
+		Card card_copy = new Card("Prueba", cars);
 		card_copy.addAttribute("RPM", 100);
 		card_copy.addAttribute("Velocidad", 220);
 		card_copy.addAttribute("Kms", 0);
@@ -127,7 +127,7 @@ public class AbstractCardTest {
 		v8_i.addAttribute("Kms", 0);
 		v8_i.addAttribute("Año", 2002);
 		
-		AbstractCard card_i = new Card("Prueba", cars);
+		Card card_i = new Card("Prueba", cars);
 		card_i.addAttribute("RPM", 250);
 		card_i.addAttribute("Velocidad", 200);
 		card_i.addAttribute("Kms", 200);

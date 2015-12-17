@@ -1,8 +1,7 @@
 package cards;
 
-import java.util.Hashtable;
 import java.util.Iterator;
-import java.util.Set;
+import java.util.UUID;
 
 import utils.Util;
 
@@ -11,23 +10,29 @@ public abstract class AbstractCard {
 	protected String name;
 	private String imagePath;
 	protected CardType ctype;
-	private static final Integer empty = 0;
-	protected Hashtable<String, Integer> attrs;
+	protected static final Integer empty = 0;
+//	protected Hashtable<String, Integer> attrs;
+	private UUID id;
 	
 	public AbstractCard(String name, CardType ctype) {
 		this.ctype = ctype;
 		this.name = name;
-		this.attrs = new Hashtable<String, Integer>();
+//		this.attrs = new Hashtable<String, Integer>();
+		this.id = UUID.randomUUID();
 	
-		init();
+//		init();
 
 	}
 
-	protected void init() {
-		Iterator<String> iter = this.ctype.iterator();
-		while(iter.hasNext()) {
-			this.attrs.put(iter.next(), empty);
-		}
+//	protected void init() {
+//		Iterator<String> iter = this.ctype.iterator();
+//		while(iter.hasNext()) {
+//			this.attrs.put(iter.next(), empty);
+//		}
+//	}
+	
+	public UUID getID() {
+		return this.id;
 	}
 	
 	public String getName() {
@@ -39,34 +44,20 @@ public abstract class AbstractCard {
 		
 		return imagePath;
 	}
+	
+	public void setImagePath(String path) {
+		
+		this.imagePath = path;
+	}
 
 	public CardType getCtype() {
 		
 		return ctype;
 	}
 	
-	public Integer getAttribute(String name) {
+	public abstract Integer getAttribute(String name);
 		
-		return attrs.get(Util.capitalize(name));
-	}
-	
-	public void addAttribute(String key, Integer value) throws RuntimeException {
-		key = Util.capitalize(key);
-		if (this.ctype.contains(key)) {
-			this.attrs.put(key, value);
-		} else {
-			throw new RuntimeException("Adding an attribute that is not supported by CardType.");
-		}
-	}
-	
-	public void printAttributes() {
-		System.out.println("["+this.getName()+"]");
-		Set<String> keys = this.attrs.keySet();
-		for(String key: keys) {
-			System.out.println(key+": "+this.getAttribute(key));
-		}
-		System.out.println();
-	}
+	public abstract void printAttributes();
 	
     @Override
     public int hashCode() {
