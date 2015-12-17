@@ -33,6 +33,10 @@ public class CompositeCardTest {
 		
 		CompositeCard compcard = new CompositeCard("Prueba composite", cars);
 		assertNull(compcard.getAttribute("Inexistente"));
+		
+		
+		
+		System.out.println(compcard.getAttribute("RPM"));
 		assertEquals(new Integer(0), compcard.getAttribute("RPM"));
 				
 		compcard.addCard(card);
@@ -46,7 +50,7 @@ public class CompositeCardTest {
 		assertEquals(new Integer(2002), compcard.getAttribute("Año"));
 		
 		compcard.addCard(v8);
-
+		
 		assertEquals(new Integer((100+250)/2), compcard.getAttribute("Rpm"));
 		assertEquals(new Integer((200+220)/2), compcard.getAttribute("Velocidad"));
 		assertEquals(new Integer((200+0)/2), compcard.getAttribute("Kms"));
