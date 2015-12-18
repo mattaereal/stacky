@@ -34,12 +34,12 @@ public class RootLayoutController {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(Main.class.getResource("/view/cards/CardsView.fxml"));
 		AnchorPane pane = null;
-		try{
+		try {
 			pane = loader.load();
 		} catch(IOException e){
 			e.printStackTrace();
 		}
-		CardsViewController controller = loader.getController();
+		
 		Stage stage = new Stage();
 		Scene scene = new Scene(pane);
 		stage.setScene(scene);

@@ -6,9 +6,9 @@ import org.junit.Test;
 
 import cards.Card;
 import cards.CardDeck;
-import cards.CardDeckFactory;
 import cards.CardType;
 import cards.CompositeCard;
+import cards.factories.CardDeckFactory;
 
 public class CardDeckFactoryTest {
 

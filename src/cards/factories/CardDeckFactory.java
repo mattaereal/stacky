@@ -1,4 +1,4 @@
-package cards;
+package cards.factories;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -12,6 +12,8 @@ import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.StaxDriver;
 
 import application.Main;
+import cards.CardDBHandler;
+import cards.CardDeck;
 
 public class CardDeckFactory {
 	static Logger logger = Logger.getLogger(Main.class.getName());

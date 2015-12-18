@@ -6,11 +6,11 @@ import org.junit.Test;
 
 import cards.Card;
 import cards.CardDBHandler;
-import cards.CardDBHandlerFactory;
 import cards.CardDeck;
-import cards.CardDeckFactory;
 import cards.CardType;
 import cards.CompositeCard;
+import cards.factories.CardDBHandlerFactory;
+import cards.factories.CardDeckFactory;
 
 public class CardDBHandlerTest {
 
