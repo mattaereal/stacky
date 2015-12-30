@@ -39,6 +39,17 @@ public class Card extends AbstractCard {
 		System.out.println();
 	}
 	
+	public String getAttributes() {
+		String buff = "";
+		buff += "["+this.getName()+"]";
+		Set<String> keys = this.attrs.keySet();
+		for(String key: keys) {
+			buff += "\n" + key + ": " + this.getAttribute(key);
+		}
+		
+		return buff;
+	}
+	
 	public Integer getAttribute(String name) {
 		
 		return attrs.get(Util.capitalize(name));

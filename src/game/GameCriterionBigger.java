@@ -12,8 +12,8 @@ public class GameCriterionBigger extends GameCriterion {
 	@Override
 	public int fight(AbstractCard c1, AbstractCard c2, String attribute) throws RuntimeException {
 
-		c1.printAttributes();
-		c2.printAttributes();
+//		c1.printAttributes();
+//		c2.printAttributes();
 		logger.info("Fighting over -> " + attribute + ": ");
 		logger.info(
 				c1.getAttribute(attribute) + " (" + c1 + ") " + "vs" + " (" + c2 + ") " + c2.getAttribute(attribute));

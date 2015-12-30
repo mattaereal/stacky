@@ -3,12 +3,16 @@ package game.strategies;
 import java.util.Set;
 
 import cards.AbstractCard;
+import game.GameCriterion;
 import game.GameRecord;
 
 public class PlayerAlwaysBiggerStrategy extends PlayerStrategy {
+	
+	private final String name = "Always Bigger";
+	private AbstractCard current;
 
 	@Override
-	public String getAttribute(AbstractCard current, GameRecord feedback) {
+	public String getAttribute() {
 		Set<String> attrs = current.getCtype().getAttrs();
 		int max = 0,tmp = 0;
 		String ret = null;
@@ -21,5 +25,24 @@ public class PlayerAlwaysBiggerStrategy extends PlayerStrategy {
 
 		return ret;
 	}
+	
+	@Override
+	public void setupNextPlay(AbstractCard current, GameRecord feedback, String preferedAttribute,
+			GameCriterion gCrit) {
+		this.current = current;
+		
+	}
+	
+	@Override
+	public String toString() {
+		return name + " " + super.name;
+	}
+
+	@Override
+	public boolean isInteractive() {
+
+		return false;
+	}
+
 
 }

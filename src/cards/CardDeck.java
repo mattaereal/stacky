@@ -100,22 +100,6 @@ public class CardDeck {
 		this.deck.remove(card);
 		this.deck_ids.remove(card.getID());
 	}
-
-	/**
-	 * Returns a concatenation of the names of every
-	 * card inside the deck.
-	 * @see java.lang.Object#toString()
-	 * 
-	 */
-	public String toString() {
-		String buff = "";
-		Iterator<AbstractCard> it = deck.iterator();
-		while (it.hasNext()) {
-			buff += it.next().getName() + "\n";
-		}
-		
-		return buff;
-	}
 	
 	/**
 	 * Gets current deck.
@@ -318,6 +302,37 @@ public class CardDeck {
 		while(it.hasNext()) {
 			System.out.println(it.next());
 		}
+	}
+	
+	/**
+	 * Returns a concatenation of the names of every
+	 * card inside the deck.
+	 * @see java.lang.Object#toString()
+	 * 
+	 */
+	public String getCardsString() {
+		String buff = "";
+		Iterator<AbstractCard> it = deck.iterator();
+		while (it.hasNext()) {
+			buff += it.next().getName() + "\n";
+		}
+		
+		return buff;
+	}
+	
+	/**
+	 * Returns deck name and the quantity of the cards in it.
+	 * @see java.lang.Object#toString()
+	 * 
+	 */
+	public String toString() {
+		
+		return this.name + " (" + this.deck.size() + ")";
+	}
+	
+	public int size() {
+		
+		return this.deck.size();
 	}
 	
 }

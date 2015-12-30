@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import utils.Util;
 
@@ -80,4 +81,13 @@ public class CompositeCard extends AbstractCard {
 		System.out.println();
 	}
 	
+	@Override
+	public String getAttributes() {
+		String buff = "["+this.getName()+"]";
+		for(String key: this.ctype.getAttrs()) {
+			buff += "\n" + key + ": " + this.getAttribute(key);
+		}
+		
+		return buff;
+	}
 }

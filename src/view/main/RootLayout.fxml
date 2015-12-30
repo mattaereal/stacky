@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.web.*?>
 <?import javafx.scene.control.*?>
@@ -37,18 +38,20 @@
    <center>
       <AnchorPane fx:id="anchorPaneGameProperties" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <ComboBox fx:id="comboBoxStrategyPlayer" layoutX="57.0" layoutY="448.0" prefWidth="150.0" />
+            <ComboBox fx:id="comboBoxStrategyPlayer1" layoutX="57.0" layoutY="448.0" prefWidth="150.0" />
             <Label layoutX="57.0" layoutY="426.0" text="Strategy" />
             <Label layoutX="437.0" layoutY="299.0" text="Deck" />
             <ComboBox fx:id="comboBoxDeck" layoutX="437.0" layoutY="321.0" prefWidth="150.0" />
-            <Label layoutX="808.0" layoutY="437.0" text="Strategy" />
-            <ComboBox fx:id="comboBoxStrategyCPU" layoutX="808.0" layoutY="459.0" prefWidth="150.0" />
-            <Label layoutX="95.0" layoutY="392.0" text="Player2" />
-            <Label layoutX="863.0" layoutY="407.0" text="Player2" />
+            <Label layoutX="813.0" layoutY="426.0" text="Strategy" />
+            <ComboBox fx:id="comboBoxStrategyPlayer2" layoutX="813.0" layoutY="448.0" prefWidth="150.0" />
+            <Label layoutX="88.0" layoutY="355.0" text="Player1">
+               <font>
+                  <Font size="24.0" />
+               </font></Label>
             <ComboBox fx:id="comboBoxGameCriterion" layoutX="437.0" layoutY="440.0" prefWidth="150.0" />
             <Label layoutX="452.0" layoutY="419.0" text="Game criterion" />
             <Button fx:id="buttonStartGame" layoutX="481.0" layoutY="615.0" mnemonicParsing="false" onMousePressed="#startGame" text="Start game" />
-            <ImageView fitHeight="200.0" fitWidth="143.0" layoutX="77.0" layoutY="120.0">
+            <ImageView fitHeight="200.0" fitWidth="143.0" layoutX="61.0" layoutY="120.0">
                <image>
                   <Image url="@../../../db/img/Card.png" />
                </image>
@@ -68,11 +71,18 @@
                   <Image url="@../../../db/img/Card.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="200.0" fitWidth="143.0" layoutX="816.0" layoutY="146.0">
+            <ImageView fitHeight="200.0" fitWidth="143.0" layoutX="816.0" layoutY="120.0">
                <image>
                   <Image url="@../../../db/img/Card.png" />
                </image>
             </ImageView>
+            <Label layoutX="843.0" layoutY="355.0" text="Player2">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <TextField fx:id="textFieldLimit" layoutX="527.0" layoutY="500.0" prefHeight="24.0" prefWidth="60.0" />
+            <Label layoutX="446.0" layoutY="505.0" text="Plays limit:" />
          </children>
       </AnchorPane>
    </center>

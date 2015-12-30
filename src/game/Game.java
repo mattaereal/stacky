@@ -10,12 +10,15 @@ import cards.CardDeck;
 public class Game {
 	static Logger logger = Logger.getLogger(Main.class.getName());
 	protected CardDeck deck;
-	protected Player p1, p2, winner;
+	protected Player p1, p2;
+	public Player winner;
 	protected GameCriterion gcrit;
-	private ArrayList<AbstractCard> tiePool;
+	public ArrayList<AbstractCard> tiePool;
 	private String attribute;
 	private boolean tie;
 	private GameRecord gameRecord;
+	private int limit = 100;
+	private int handCount = 0;
 	
 	public Game(Player p1, Player p2, CardDeck cd, GameCriterion gCrit) {
 		this.deck = cd;
@@ -31,6 +34,7 @@ public class Game {
 	 * Deals cards.
 	 */
 	public void setup() {
+		System.out.println(gameRecord);
 		p1.setFeedback(gameRecord);
 		p2.setFeedback(gameRecord);
 		deal();
@@ -45,51 +49,65 @@ public class Game {
 		deck.split(p1, p2);
 	}
 	
-	/**
-	 * Starts a game between 2 players.
-	 * Setups what's needed before starting,
-	 * and plays until a winner is found.
-	 */
-	public void start() {
-		setup();
-		play();
-		showWinner();
+	public void setLimit(int lim) {
+		this.limit = lim;
 	}
+	
+	public int getLimit() {
+		
+		return limit;
+	}
+	
+	public int getHandCount() {
+		
+		return handCount;
+	}
+	
+//	/**
+//	 * Starts a game between 2 players.
+//	 * Setups what's needed before starting,
+//	 * and plays until a winner is found.
+//	 */
+//	public void start() {
+//		setup();
+//		play();
+//		showWinner();
+//	}
 	
 	public Player getWinner() {
 		return this.winner;
 	}
 	
-	/**
-	 * Plays ...
-	 */
-	private void play() throws RuntimeException {
-		int min = 0;
-		int max = 100;
-		int rand = min + (int)(Math.random() * ((max - min) + 1));
-		Player player_turn;
-		
-		if (rand < 50) {
-			player_turn = p1;
-		} else {
-			player_turn = p2;
-		}
-		
-		player_turn = hand(player_turn, p1, p2, gcrit);
-		
-		while (p1.hasCards() && p2.hasCards()) {
-			player_turn = hand(player_turn, p1, p2, gcrit);
-		}	
-		
-		if (p1.hasCards()) {
-			this.winner = p1;
-		} else if (p2.hasCards()) {
-			this.winner = p2;
-		} else {
-			throw new RuntimeException("Something happened @ game play.");
-		}
-		
-	}
+//	/**
+//	 * Plays ...
+//	 */
+//	public void play() throws RuntimeException {
+//		int min = 0;
+//		int max = 100;
+//		int rand = min + (int)(Math.random() * ((max - min) + 1));
+//		Player player_turn;
+//		
+//		if (rand < 50) {
+//			player_turn = p1;
+//		} else {
+//			player_turn = p2;
+//		}
+//		
+//		player_turn = hand(player_turn, p1, p2, gcrit);
+//		
+//		while (p1.hasCards() && p2.hasCards()) {
+//			player_turn = hand(player_turn, p1, p2, gcrit);
+//		}	
+//		
+//		if (p1.hasCards()) {
+//			this.winner = p1;
+//		} else if (p2.hasCards()) {
+//			this.winner = p2;
+//		} else {
+//			throw new RuntimeException("Something happened @ game play.");
+//		}
+//		
+//	}
 	
 	/**
 	 * 
@@ -100,17 +118,23 @@ public class Game {
 	 * @return Returns the Player that won the hand.
 	 */
 	public Player hand(Player turn, Player p1, Player p2, GameCriterion gc) throws RuntimeException {
+		handCount += 1;
 		AbstractCard c1 = p1.top();
 		AbstractCard c2 = p2.top();
 		int result = 0;
+		String preferedAttribute = null;
 		
 		if (!this.tie) {
 			if (turn.equals(p1)) {
 				logger.info(p1 + " selects attribute.");
-				attribute = p1.selectAttribute(c1);
+				if (p1.getgStrategy().isInteractive())
+					preferedAttribute = null;
+				attribute = p1.selectAttribute(c1, preferedAttribute, gc);
 			} else {
 				logger.info(p2 + " selects attribute.");
-				attribute = p2.selectAttribute(c2);
+				if (p2.getgStrategy().isInteractive())
+					preferedAttribute = null;
+				attribute = p2.selectAttribute(c2, preferedAttribute, gc);
 			}
 		}		
 
@@ -131,7 +155,7 @@ public class Game {
 			this.tie = false;
 			turn = p2;
 		} else if (result == GameCriterion.EQ) {
-			logger.info("Cards added to pool since tie.");
+			logger.info("[TIE] Cards added to tie pool.");
 			this.tie = true;
 		} else {
 			throw new RuntimeException("Something happened @ hand");

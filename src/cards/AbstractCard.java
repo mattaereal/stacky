@@ -11,27 +11,17 @@ public abstract class AbstractCard {
 	private String imagePath;
 	protected CardType ctype;
 	protected static final Integer empty = 0;
-//	protected Hashtable<String, Integer> attrs;
 	private UUID id;
 	
 	public AbstractCard(String name, CardType ctype) {
 		this.ctype = ctype;
 		this.name = name;
-//		this.attrs = new Hashtable<String, Integer>();
 		this.id = UUID.randomUUID();
-	
-//		init();
-
 	}
 
-//	protected void init() {
-//		Iterator<String> iter = this.ctype.iterator();
-//		while(iter.hasNext()) {
-//			this.attrs.put(iter.next(), empty);
-//		}
-//	}
 	
 	public UUID getID() {
+		
 		return this.id;
 	}
 	
@@ -58,6 +48,8 @@ public abstract class AbstractCard {
 	public abstract Integer getAttribute(String name);
 		
 	public abstract void printAttributes();
+	
+	public abstract String getAttributes();
 	
     @Override
     public int hashCode() {

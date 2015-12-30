@@ -10,7 +10,7 @@ import cards.CardType;
 import cards.CompositeCard;
 import cards.factories.CardDeckFactory;
 
-public class CardDeckFactoryTest {
+public class CardDeckFactoryTestOld {
 
 	public void testFromAndToFile() {
 		//Old test.

@@ -160,8 +160,9 @@ public class Player {
 	 * Selects an attribute based on the strategy.
 	 * @return An attribute.
 	 */
-	public String selectAttribute(AbstractCard current) {
-		return this.gStrategy.getAttribute(current, feedback);
+	public String selectAttribute(AbstractCard current, String preferedAttribute, GameCriterion gCrit) {
+		this.gStrategy.setupNextPlay(current, feedback, preferedAttribute, gCrit);
+		return this.gStrategy.getAttribute();
 	}
 
 	/**
@@ -215,6 +216,27 @@ public class Player {
 	}
 	
 	public String toString() {
-		return "Player: " + this.getName();
+		return "\"" + this.getName() + "\"";
 	}
+	
+	public AbstractCard peek() {
+		if (hasCards()) {
+			if (current_deck.isEmpty()) {
+				used_deck.shuffle();
+				tmp_deck = current_deck;
+				current_deck = used_deck;
+				used_deck = tmp_deck;
+			}
+			
+			return current_deck.getDeck().get(0);
+		}
+		
+		return null;
+	}
+	
+	public int getRemainingCards() {
+		
+		return current_deck.size() + used_deck.size();
+	}
+	
 }

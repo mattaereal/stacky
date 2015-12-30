@@ -1,12 +1,19 @@
 package game.strategies;
 
 import cards.AbstractCard;
+import game.GameCriterion;
 import game.GameRecord;
 
 public class PlayerStaticStrategy extends PlayerStrategy {
 
+	private final static String name = "Static";
+	private AbstractCard current;
+	private GameRecord feedback;
+	private GameCriterion gCrit;
+	private String preferedAttribute;
+	
 	@Override
-	public String getAttribute(AbstractCard current, GameRecord feedback) {
+	public String getAttribute() {
 		if (feedback.getDeck().getName().equals("Superheroes")) {
 			if (current.getAttribute("Peleas Ganadas") > 900) {
 				return "Peleas Ganadas";
@@ -20,7 +27,31 @@ public class PlayerStaticStrategy extends PlayerStrategy {
 		}
 			
 		PlayerStrategy ps = new PlayerAlwaysBiggerStrategy();
-		return ps.getAttribute(current, feedback);
+		ps.setupNextPlay(current, feedback, preferedAttribute, gCrit);
+		return ps.getAttribute();
 	}
+	
+	@Override
+	public void setupNextPlay(AbstractCard current, GameRecord feedback, String preferedAttribute,
+			GameCriterion gCrit) {
+		this.current = current;
+		this.feedback = feedback;
+		this.gCrit = gCrit;
+		this.preferedAttribute = preferedAttribute;
+		
+	}
+
+	@Override
+	public String toString() {
+		return name + " " + super.name;
+	}
+
+	@Override
+	public boolean isInteractive() {
+
+		return false;
+	}
+
+
 
 }

@@ -17,7 +17,7 @@ import cards.CardDBHandler;
 public class CardDBHandlerFactory {
 	static Logger logger = Logger.getLogger(Main.class.getName());
     private static BufferedReader br;
-    private static String db = "db/cards/db.xml";
+    private static String db = "db/cards/all.xml";
     
     public static CardDBHandler fromFile(String path) {
         try {
@@ -31,7 +31,7 @@ public class CardDBHandlerFactory {
             }
             
             CardDBHandler cdh = (CardDBHandler) xstream.fromXML(xml);
-            logger.info("Deck loaded from" + path);
+            logger.info("Deck loaded from " + path);
             return cdh;
         } catch (IOException e) {
             e.printStackTrace();
