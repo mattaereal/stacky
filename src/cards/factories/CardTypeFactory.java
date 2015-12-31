@@ -13,12 +13,14 @@ import com.thoughtworks.xstream.io.xml.StaxDriver;
 
 import application.Main;
 import cards.CardType;
+import utils.Util;
 
 public class CardTypeFactory {
 	static Logger logger = Logger.getLogger(Main.class.getName());
     private static BufferedReader br;
     
-    public static CardType fromFile(String path) {
+    public static CardType fromFile(String name) {
+    	String path = Util.ctypepath + name + ".xml"; 
         try {
             XStream xstream = new XStream(new StaxDriver());
             br = new BufferedReader(new FileReader(path));
@@ -39,7 +41,8 @@ public class CardTypeFactory {
         return null;
     }
     
-    public static boolean toFile(String path, CardType ct) {
+    public static boolean toFile(String name, CardType ct) {
+    	String path = Util.ctypepath + name + ".xml"; 
         XStream xstream = new XStream(new StaxDriver());
         String xml = xstream.toXML(ct);
         try {

@@ -12,42 +12,58 @@
    <center>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <Label layoutX="207.0" layoutY="65.0" text="Player1 vs Player2">
+            <Label layoutX="331.0" layoutY="65.0" text="Game on!">
                <font>
                   <Font size="66.0" />
                </font>
             </Label>
             <Button fx:id="buttonEndGame" layoutX="470.0" layoutY="674.0" mnemonicParsing="false" onMousePressed="#endGame" text="End game" />
             <Button fx:id="buttonHand" layoutX="487.0" layoutY="612.0" mnemonicParsing="false" onMousePressed="#playHand" text="Hand" />
-            <Text fx:id="textPlayer1Card" layoutX="125.0" layoutY="388.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Top card data" />
-            <Text fx:id="textPlayer2Card" layoutX="661.0" layoutY="388.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Top card data" />
-            <Text fx:id="textPlayer1" layoutX="14.0" layoutY="264.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Player #1" textAlignment="CENTER" wrappingWidth="460.0">
+            <Text fx:id="textPlayer1Card" layoutX="85.0" layoutY="558.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Top card data" />
+            <Text fx:id="textPlayer2Card" layoutX="661.0" layoutY="558.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Top card data" />
+            <Text fx:id="textPlayer1" layoutX="-27.0" layoutY="434.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Player #1" textAlignment="CENTER" wrappingWidth="460.0">
                <font>
                   <Font name="DejaVu Sans ExtraLight" size="56.0" />
                </font>
             </Text>
-            <Text fx:id="textPlayer2" layoutX="550.0" layoutY="264.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Player #2" textAlignment="CENTER" wrappingWidth="460.0">
+            <Text fx:id="textPlayer2" layoutX="550.0" layoutY="434.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Player #2" textAlignment="CENTER" wrappingWidth="460.0">
                <font>
                   <Font name="DejaVu Sans ExtraLight" size="56.0" />
                </font>
             </Text>
-            <Text fx:id="textPlayerTurn" layoutX="447.0" layoutY="390.0" strokeType="OUTSIDE" strokeWidth="0.0">
+            <Text fx:id="textPlayerTurn" layoutX="466.0" layoutY="250.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nobody">
                <font>
                   <Font size="18.0" />
                </font>
             </Text>
-            <Label layoutX="454.0" layoutY="350.0" text="Turn of player:" />
-            <Text fx:id="textPlayerWon" layoutX="389.0" layoutY="545.0" strokeType="OUTSIDE" strokeWidth="0.0" text="No one has won yet!">
+            <Label layoutX="454.0" layoutY="210.0" text="Turn of player:" />
+            <Text fx:id="textPlayerWon" layoutX="468.0" layoutY="552.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nobody">
                <font>
                   <Font size="24.0" />
                </font>
             </Text>
-            <Text fx:id="textRemainingCardsP1" layoutX="113.0" layoutY="320.0" strokeType="OUTSIDE" strokeWidth="0.0" text="# cards" />
-            <Text fx:id="textRemainingCardsP2" layoutX="647.0" layoutY="320.0" strokeType="OUTSIDE" strokeWidth="0.0" text="# cards" />
-            <Text fx:id="textCardsInPool" layoutX="495.0" layoutY="459.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
+            <Text fx:id="textRemainingCardsP1" layoutX="73.0" layoutY="490.0" strokeType="OUTSIDE" strokeWidth="0.0" text="# cards" />
+            <Text fx:id="textRemainingCardsP2" layoutX="647.0" layoutY="490.0" strokeType="OUTSIDE" strokeWidth="0.0" text="# cards" />
+            <Text fx:id="textCardsInPool" layoutX="503.0" layoutY="459.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
             <Label layoutX="456.0" layoutY="427.0" text="# cards in pool:" />
-            <Label layoutX="112.0" layoutY="292.0" text="Remaining cards:" />
-            <Label layoutX="648.0" layoutY="292.0" text="Remaining cards:" />
+            <Label layoutX="72.0" layoutY="462.0" text="Remaining cards:" />
+            <Label layoutX="648.0" layoutY="462.0" text="Remaining cards:" />
+            <Label layoutX="468.0" layoutY="505.0" text="Winner:" />
+            <Label layoutX="454.0" layoutY="299.0" text="VS">
+               <font>
+                  <Font size="79.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="227.0" fitWidth="160.0" layoutX="76.0" layoutY="141.0">
+               <image>
+                  <Image url="@../../../db/img/6090801-media_httpdefinitivet_aImaA.jpg" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="200.0" fitWidth="178.0" layoutX="699.0" layoutY="143.0">
+               <image>
+                  <Image url="@../../../db/img/superman-facebook.jpg" />
+               </image>
+            </ImageView>
          </children>
       </AnchorPane>
    </center>

@@ -1,7 +1,6 @@
 package controller.main;
 
 import java.io.IOException;
-
 import application.Main;
 import cards.CardDeck;
 import cards.factories.CardDeckFactory;
@@ -17,7 +16,6 @@ import controller.game.GameController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
@@ -52,6 +50,10 @@ public class RootLayoutController {
 	private ComboBox<CardDeck> comboBoxDeck;
 	@FXML
 	private TextField textFieldLimit;
+	@FXML
+	private TextField textFieldPlayer1;
+	@FXML
+	private TextField textFieldPlayer2;
 	
 	@FXML
 	public void initialize() {
@@ -81,8 +83,6 @@ public class RootLayoutController {
 		comboBoxDeck.getItems().add(cars);
 		
 		textFieldLimit.setText("100");
-		
-		
 	}
 	
 	@FXML
@@ -128,6 +128,8 @@ public class RootLayoutController {
 		PlayerStrategy player2Strat = comboBoxStrategyPlayer2.getSelectionModel().getSelectedItem();
 		CardDeck cardDeck = comboBoxDeck.getSelectionModel().getSelectedItem();
 		String gameLimit = textFieldLimit.getText();
+		String p1name = textFieldPlayer1.getText();
+		String p2name = textFieldPlayer2.getText();
 		
 		
 		if ( gameCriterion != null) {
@@ -137,18 +139,18 @@ public class RootLayoutController {
 		}
 		
 		if (player1Strat != null) {
-			Player p1 = new Player("Player 1", player1Strat);
+			Player p1 = new Player(p1name, player1Strat);
 			controller.setPlayer1(p1);
 		} else {
-			Player p1 = new Player("Player 1", new PlayerRandomStrategy());
+			Player p1 = new Player(p1name, new PlayerRandomStrategy());
 			controller.setPlayer1(p1);
 		}
 		
 		if (player2Strat != null) {
-			Player p2 = new Player("Player 2", player2Strat);
+			Player p2 = new Player(p2name, player2Strat);
 			controller.setPlayer2(p2);
 		} else {
-			Player p2 = new Player("Player 2", new PlayerRandomStrategy());
+			Player p2 = new Player(p2name, new PlayerRandomStrategy());
 			controller.setPlayer2(p2);
 		}
 		

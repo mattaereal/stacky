@@ -1,25 +1,46 @@
 package controller.cards;
 
+import java.io.IOException;
 import java.util.Iterator;
 
+import application.Main;
 import cards.AbstractCard;
 import cards.CardDBHandler;
 
 import cards.factories.CardDBHandlerFactory;
+import controller.cards.create.CreateCardViewController;
+import controller.game.GameController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 public class CardsViewController {
 	@FXML
-	TableView<AbstractCard> tvCards;
+	private TableView<AbstractCard> tvCards;
 	@FXML
-	TableColumn<AbstractCard, String> itemCardName;
+	private TableColumn<AbstractCard, String> itemCardName;
 	@FXML
-	TableColumn<AbstractCard, String> itemCardType;
+	private TableColumn<AbstractCard, String> itemCardType;
+	@FXML
+	private Button buttonCreateCard;
+	@FXML
+	private Button buttonEditCard;
+	@FXML
+	private Button buttonDeleteCard;
+	@FXML
+	private Button buttonCancel;
+	@FXML
+	private Button buttonPersist;
+	
+	private CardDBHandler cardHandler;
 
 	private final ObservableList<AbstractCard> data = FXCollections.observableArrayList();
 	
@@ -32,12 +53,70 @@ public class CardsViewController {
                 new PropertyValueFactory<AbstractCard, String>("ctype"));
  
 		
-		CardDBHandler ch = CardDBHandlerFactory.fromFile();
-		Iterator<AbstractCard> it = ch.getList().iterator();
+		cardHandler = CardDBHandlerFactory.fromFile();
+		Iterator<AbstractCard> it = cardHandler.getList().iterator();
 		while(it.hasNext()) {
 			data.add(it.next());
 		}
 		
 		tvCards.setItems(data);		
+	}
+	
+	@FXML
+	public void deleteCard() {
+		AbstractCard curr = tvCards.getSelectionModel().getSelectedItem();
+		System.out.println("Deleting: " + curr);
+		data.remove(curr);
+		cardHandler.delCard(curr.getID());
+	}
+	
+	@FXML
+	public void persistAction() {
+		CardDBHandlerFactory.toFile(cardHandler);
+	    Stage stage = (Stage) buttonPersist.getScene().getWindow();
+	    stage.close();
+	}
+	
+	@FXML
+	public void openCreateView(){
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(Main.class.getResource("/view/cards/create/CreateView.fxml"));
+		AnchorPane pane = null;
+		try {
+			pane = loader.load();
+		} catch(IOException e){
+			e.printStackTrace();
+		}
+		
+		CreateCardViewController controller = loader.getController();
+		controller.setupCreation(cardHandler, data);
+		
+		Stage stage = new Stage();
+		Scene scene = new Scene(pane);
+		stage.setScene(scene);
+		stage.show();
+	}
+	
+	@FXML
+	public void openEditView(){
+//		FXMLLoader loader = new FXMLLoader();
+//		loader.setLocation(Main.class.getResource("/view/cards/create/CreateView.fxml"));
+//		AnchorPane pane = null;
+//		try {
+//			pane = loader.load();
+//		} catch(IOException e){
+//			e.printStackTrace();
+//		}
+//		
+//		Stage stage = new Stage();
+//		Scene scene = new Scene(pane);
+//		stage.setScene(scene);
+//		stage.show();
+	}
+	
+	@FXML
+	public void cancelAction() {
+	    Stage stage = (Stage) buttonCancel.getScene().getWindow();
+	    stage.close();
 	}
 }

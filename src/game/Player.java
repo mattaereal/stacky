@@ -160,8 +160,8 @@ public class Player {
 	 * Selects an attribute based on the strategy.
 	 * @return An attribute.
 	 */
-	public String selectAttribute(AbstractCard current, String preferedAttribute, GameCriterion gCrit) {
-		this.gStrategy.setupNextPlay(current, feedback, preferedAttribute, gCrit);
+	public String selectAttribute(AbstractCard current) {
+
 		return this.gStrategy.getAttribute();
 	}
 
@@ -216,7 +216,7 @@ public class Player {
 	}
 	
 	public String toString() {
-		return "\"" + this.getName() + "\"";
+		return this.getName();
 	}
 	
 	public AbstractCard peek() {

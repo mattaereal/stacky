@@ -1,15 +1,18 @@
 package controller.game;
 
+import java.util.ArrayList;
+import java.util.Optional;
+
 import cards.AbstractCard;
 import cards.CardDeck;
-import controller.main.RootLayoutController;
 import game.Game;
 import game.GameCriterion;
 import game.Player;
-import game.strategies.PlayerInteractiveStrategy;
-import game.strategies.PlayerStrategy;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
@@ -110,6 +113,7 @@ public class GameController {
 		textCardsInPool.setText(String.format("%d", game.tiePool.size()));
 		textRemainingCardsP1.setText(String.format("%d", player1.getRemainingCards()));
 		textRemainingCardsP2.setText(String.format("%d", player2.getRemainingCards()));
+		
 		if (firstHand) {
 			firstHand = false;
 			int min = 0;
@@ -126,19 +130,29 @@ public class GameController {
 			textPlayer1Card.setText((player1.peek().getAttributes()));
 			textPlayer2Card.setText((player2.peek().getAttributes()));
 		} else {
-			if (game.getHandCount() < game.getLimit()) {
+			if (!game.hasEnded(player1, player2)) {
 				if (player1.hasCards() && player2.hasCards()) {
+					String preferedAtrribute = null;
+					
+					if (player_turn.getgStrategy().isInteractive() && !game.isTie()) {
+						preferedAtrribute = getInteractiveAttr(player_turn.peek());
+					} 
+					
+					player_turn.getgStrategy().setupNextPlay(player_turn.peek(), game.getGameRecord(), preferedAtrribute, gameCrit);
 					player_turn = game.hand(player_turn, player1, player2, gameCrit);
 					textPlayerTurn.setText(player_turn.toString());
-					// Si justo se queda sin cartas después de jugar revienta.
-					textPlayer1Card.setText((player1.peek().getAttributes()));
-					textPlayer2Card.setText((player2.peek().getAttributes()));
-				} else if (player1.hasCards()) {
-					textPlayerWon.setText(player1.toString());
-				} else if (player2.hasCards()) {
-					textPlayerWon.setText(player2.toString());
-				} else {
-					throw new RuntimeException("Something happened @ game play.");
+			
+					if (player1.hasCards()) {
+						textPlayer1Card.setText((player1.peek().getAttributes()));
+					} else {
+						textPlayer1Card.setText("No more cards.");
+					}
+					
+					if (player2.hasCards()) {
+						textPlayer2Card.setText((player2.peek().getAttributes()));
+					} else {
+						textPlayer2Card.setText("No more cards.");
+					}
 				}
 			} else {
 				if (player1.getRemainingCards() > player2.getRemainingCards()) {
@@ -150,6 +164,32 @@ public class GameController {
 				}
 			}
 		}
+	}
+	
+	public String getInteractiveAttr(AbstractCard current) {
+		Alert alert = new Alert(AlertType.CONFIRMATION);
+		alert.setTitle("Atrribute selection: " + player_turn);
+		alert.setContentText("Choose the card attribute you desire to play with.");
+		alert.setResizable(true);
+		alert.getDialogPane().setPrefSize(850, 200);
+
+		ArrayList<ButtonType> buttons = new ArrayList<ButtonType>();
+		ArrayList<String> attributes = new ArrayList<String>();
+		
+		for(String key: current.getCtype().getAttrs()) {
+			buttons.add(new ButtonType(key + ": " + current.getAttribute(key)));
+			attributes.add(key);
+		}
+		
+		alert.getButtonTypes().setAll(buttons);
+
+		Optional<ButtonType> result = alert.showAndWait();
+		
+		while (!result.isPresent()) {
+			result = alert.showAndWait();
+		}
+		
+		return attributes.get(buttons.indexOf(result.get()));
 	}
 
 	@FXML

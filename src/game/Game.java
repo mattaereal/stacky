@@ -26,7 +26,7 @@ public class Game {
 		this.p1 = p1;
 		this.p2 = p2;
 		this.tiePool = new ArrayList<AbstractCard>();
-		this.gameRecord = new GameRecord(p1, p2, cd);
+		this.setGameRecord(new GameRecord(p1, p2, cd));
 		this.tie = false;
 	}
 	
@@ -34,9 +34,9 @@ public class Game {
 	 * Deals cards.
 	 */
 	public void setup() {
-		System.out.println(gameRecord);
-		p1.setFeedback(gameRecord);
-		p2.setFeedback(gameRecord);
+		System.out.println(getGameRecord());
+		p1.setFeedback(getGameRecord());
+		p2.setFeedback(getGameRecord());
 		deal();
 	}
 	
@@ -62,53 +62,8 @@ public class Game {
 		
 		return handCount;
 	}
-	
-//	/**
-//	 * Starts a game between 2 players.
-//	 * Setups what's needed before starting,
-//	 * and plays until a winner is found.
-//	 */
-//	public void start() {
-//		setup();
-//		play();
-//		showWinner();
-//	}
-	
-	public Player getWinner() {
-		return this.winner;
-	}
-	
-//	/**
-//	 * Plays ...
-//	 */
-//	public void play() throws RuntimeException {
-//		int min = 0;
-//		int max = 100;
-//		int rand = min + (int)(Math.random() * ((max - min) + 1));
-//		Player player_turn;
-//		
-//		if (rand < 50) {
-//			player_turn = p1;
-//		} else {
-//			player_turn = p2;
-//		}
-//		
-//		player_turn = hand(player_turn, p1, p2, gcrit);
-//		
-//		while (p1.hasCards() && p2.hasCards()) {
-//			player_turn = hand(player_turn, p1, p2, gcrit);
-//		}	
-//		
-//		if (p1.hasCards()) {
-//			this.winner = p1;
-//		} else if (p2.hasCards()) {
-//			this.winner = p2;
-//		} else {
-//			throw new RuntimeException("Something happened @ game play.");
-//		}
-//		
-//	}
-	
+		
+		
 	/**
 	 * 
 	 * @param turn Player who owns the turn.
@@ -122,19 +77,14 @@ public class Game {
 		AbstractCard c1 = p1.top();
 		AbstractCard c2 = p2.top();
 		int result = 0;
-		String preferedAttribute = null;
 		
 		if (!this.tie) {
 			if (turn.equals(p1)) {
 				logger.info(p1 + " selects attribute.");
-				if (p1.getgStrategy().isInteractive())
-					preferedAttribute = null;
-				attribute = p1.selectAttribute(c1, preferedAttribute, gc);
+				attribute = p1.selectAttribute(c1);
 			} else {
 				logger.info(p2 + " selects attribute.");
-				if (p2.getgStrategy().isInteractive())
-					preferedAttribute = null;
-				attribute = p2.selectAttribute(c2, preferedAttribute, gc);
+				attribute = p2.selectAttribute(c2);
 			}
 		}		
 
@@ -161,18 +111,22 @@ public class Game {
 			throw new RuntimeException("Something happened @ hand");
 		}
 		
-		this.gameRecord.addHand(c1, c2, turn, attribute);
+		this.getGameRecord().addHand(c1, c2, turn, attribute);
 		
 		return turn;
 		
 	}
 	
-	/**
-	 * Shows the winner of the game.
-	 */
-	private void showWinner() {
-		System.out.println("Winner: " + winner);
+	public boolean isTie() {
+		
+		return this.tie;
 	}
+	
+	public boolean hasEnded(Player p1, Player p2) {
+		
+		return ((this.getHandCount() >= this.getLimit()) || (p1.getRemainingCards() == 0) || (p2.getRemainingCards() == 0));
+	}
+	
 	
    @Override
     public boolean equals(final Object obj) {
@@ -204,4 +158,13 @@ public class Game {
                + this.deck.hashCode();
        return result;
    }
+
+	public GameRecord getGameRecord() {
+		return gameRecord;
+	}
+	
+	private void setGameRecord(GameRecord gameRecord) {
+		this.gameRecord = gameRecord;
+	}
+
 }

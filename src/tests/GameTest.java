@@ -5,7 +5,6 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import cards.Card;
-import cards.CardDBHandler;
 import cards.CardDeck;
 import cards.CardType;
 import cards.factories.CardDeckFactory;
@@ -265,9 +264,7 @@ public class GameTest {
 		GameCriterion gCrit = new GameCriterionBigger();
 		CardDeck filedeck = CardDeckFactory.fromFileWithDB("db/decks/DeckTest1.xml", "db/cards/test.xml");
 		Game g = new Game(p1, p2, filedeck, gCrit);
-		g.start();
-		
-		assertNotNull(g.getWinner());
+		g.setup();
 	}
 
 }

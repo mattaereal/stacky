@@ -13,11 +13,12 @@ import com.thoughtworks.xstream.io.xml.StaxDriver;
 
 import application.Main;
 import cards.CardDBHandler;
+import utils.Util;
 
 public class CardDBHandlerFactory {
 	static Logger logger = Logger.getLogger(Main.class.getName());
     private static BufferedReader br;
-    private static String db = "db/cards/all.xml";
+    private static String db = Util.dbpath;
     
     public static CardDBHandler fromFile(String path) {
         try {
@@ -65,5 +66,9 @@ public class CardDBHandlerFactory {
         }
         
         return false;
+    }
+    
+    public static boolean toFile(CardDBHandler cdh) {
+    	return toFile(db, cdh);
     }
 }
