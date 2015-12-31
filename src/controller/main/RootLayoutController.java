@@ -104,6 +104,24 @@ public class RootLayoutController {
 	}
 	
 	@FXML
+	public void openDecksView(){
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(Main.class.getResource("/view/decks/DecksView.fxml"));
+		AnchorPane pane = null;
+		try {
+			pane = loader.load();
+		} catch(IOException e){
+			e.printStackTrace();
+		}
+		
+		Stage stage = new Stage();
+		Scene scene = new Scene(pane);
+		stage.setScene(scene);
+		stage.show();
+		
+	}
+	
+	@FXML
 	public void closeAppAction() {
 		Stage stage = (Stage) mainMenuBar.getScene().getWindow();
 		stage.close();

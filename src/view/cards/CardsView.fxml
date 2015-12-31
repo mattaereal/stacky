@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
@@ -10,7 +11,7 @@
       <Button fx:id="buttonCreateCard" alignment="CENTER" layoutX="455.0" layoutY="25.0" mnemonicParsing="false" onMousePressed="#openCreateView" prefWidth="97.0" text="Create Card" />
       <Button fx:id="buttonEditCard" alignment="CENTER" layoutX="455.0" layoutY="75.0" mnemonicParsing="false" onMousePressed="#openEditView" prefWidth="97.0" text="Edit Card" />
       <Button fx:id="buttonDeleteCard" alignment="CENTER" layoutX="455.0" layoutY="125.0" mnemonicParsing="false" onMousePressed="#deleteCard" prefWidth="97.0" text="Delete Card" />
-      <TableView fx:id="tvCards" layoutX="25.0" layoutY="25.0" prefHeight="550.0" prefWidth="400.0">
+      <TableView fx:id="tvCards" layoutX="25.0" layoutY="25.0" onMouseClicked="#updateAttributes" prefHeight="550.0" prefWidth="400.0">
         <columns>
           <TableColumn fx:id="itemCardName" prefWidth="75.0" text="Card name" />
           <TableColumn fx:id="itemCardType" prefWidth="75.0" text="Type" />
@@ -21,5 +22,7 @@
       </TableView>
       <Button fx:id="buttonPersist" alignment="CENTER" layoutX="455.0" layoutY="175.0" mnemonicParsing="false" onMousePressed="#persistAction" prefWidth="97.0" text="Save" />
       <Button fx:id="buttonCancel" alignment="CENTER" layoutX="455.0" layoutY="225.0" mnemonicParsing="false" onMousePressed="#cancelAction" prefWidth="97.0" text="Cancel" />
+      <Text fx:id="textCurrentAttrs" layoutX="431.0" layoutY="370.0" strokeType="OUTSIDE" strokeWidth="0.0" text="No card selected" />
+      <Label layoutX="431.0" layoutY="332.0" text="Click card for attributes:" />
    </children>
 </AnchorPane>

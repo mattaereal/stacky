@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="585.0" prefWidth="1156.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.decks.DecksViewController">
+   <children>
+      <Button fx:id="buttonAddCardToDeck" alignment="CENTER" layoutX="530.0" layoutY="293.0" mnemonicParsing="false" onMousePressed="#addCardToDeckAction" prefWidth="97.0" text="Add Card" />
+      <Button fx:id="buttonDeleteCardFromDeck" alignment="CENTER" layoutX="530.0" layoutY="343.0" mnemonicParsing="false" onMousePressed="#deleteCardFromDeckAction" prefWidth="97.0" text="Delete Card" />
+      <TableView fx:id="tvCardsDB" layoutX="25.0" layoutY="25.0" prefHeight="550.0" prefWidth="400.0">
+        <columns>
+          <TableColumn fx:id="itemCardName" prefWidth="75.0" text="Card name" />
+          <TableColumn fx:id="itemCardType" prefWidth="75.0" text="Type" />
+        </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
+      </TableView>
+      <Button fx:id="buttonPersist" alignment="CENTER" layoutX="530.0" layoutY="393.0" mnemonicParsing="false" onMousePressed="#persistAction" prefWidth="97.0" text="Save" />
+      <Button fx:id="buttonCancel" alignment="CENTER" layoutX="530.0" layoutY="443.0" mnemonicParsing="false" onMousePressed="#cancelAction" prefWidth="97.0" text="Cancel" />
+      <TableView fx:id="tvCardsFromDeck" layoutX="735.0" layoutY="25.0" prefHeight="550.0" prefWidth="400.0">
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
+         <columns>
+            <TableColumn fx:id="itemCardName1" prefWidth="75.0" text="Card name" />
+            <TableColumn fx:id="itemCardType1" prefWidth="75.0" text="Type" />
+         </columns>
+      </TableView>
+      <TableView fx:id="tvDecks" layoutX="496.0" layoutY="74.0" prefHeight="176.0" prefWidth="165.0">
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
+         <columns>
+            <TableColumn fx:id="itemCardName11" prefWidth="75.0" text="Deck name" />
+         </columns>
+      </TableView>
+   </children>
+</AnchorPane>

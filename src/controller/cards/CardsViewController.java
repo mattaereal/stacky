@@ -8,18 +8,20 @@ import cards.AbstractCard;
 import cards.CardDBHandler;
 
 import cards.factories.CardDBHandlerFactory;
-import controller.cards.create.CreateCardViewController;
+import controller.cards.create.CreateCardController;
 import controller.game.GameController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.chart.PieChart.Data;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class CardsViewController {
@@ -39,6 +41,8 @@ public class CardsViewController {
 	private Button buttonCancel;
 	@FXML
 	private Button buttonPersist;
+	@FXML
+	private Text textCurrentAttrs;
 	
 	private CardDBHandler cardHandler;
 
@@ -88,7 +92,7 @@ public class CardsViewController {
 			e.printStackTrace();
 		}
 		
-		CreateCardViewController controller = loader.getController();
+		CreateCardController controller = loader.getController();
 		controller.setupCreation(cardHandler, data);
 		
 		Stage stage = new Stage();
@@ -99,19 +103,25 @@ public class CardsViewController {
 	
 	@FXML
 	public void openEditView(){
-//		FXMLLoader loader = new FXMLLoader();
-//		loader.setLocation(Main.class.getResource("/view/cards/create/CreateView.fxml"));
-//		AnchorPane pane = null;
-//		try {
-//			pane = loader.load();
-//		} catch(IOException e){
-//			e.printStackTrace();
-//		}
-//		
-//		Stage stage = new Stage();
-//		Scene scene = new Scene(pane);
-//		stage.setScene(scene);
-//		stage.show();
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(Main.class.getResource("/view/cards/edit/EditView.fxml"));
+		AnchorPane pane = null;
+		try {
+			pane = loader.load();
+		} catch(IOException e){
+			e.printStackTrace();
+		}
+		
+		Stage stage = new Stage();
+		Scene scene = new Scene(pane);
+		stage.setScene(scene);
+		stage.show();
+	}
+	
+	@FXML
+	public void updateAttributes() {
+		System.out.println(tvCards.getSelectionModel().getSelectedItem().getAttributes());
+		textCurrentAttrs.setText(tvCards.getSelectionModel().getSelectedItem().getAttributes());
 	}
 	
 	@FXML

@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.cards.create.CreateCardController">
+<AnchorPane prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.cards.edit.EditCardController">
    <children>
       <TextField fx:id="textFieldCardName" layoutX="34.0" layoutY="390.0" promptText="Insert card name" />
       <Button fx:id="buttonSaveCard" layoutX="340.0" layoutY="423.0" mnemonicParsing="false" onMousePressed="#saveCardAction" prefHeight="16.0" prefWidth="70.0" text="Save" />
@@ -17,7 +17,6 @@
             <Image url="@../../../../db/img/Blank.jpg" />
          </image>
       </ImageView>
-      <ComboBox fx:id="comboBoxCtype" layoutX="381.0" layoutY="27.0" prefWidth="150.0" promptText="Select a type.." />
       <Label alignment="CENTER_RIGHT" layoutX="255.0" layoutY="86.0" prefHeight="25.0" prefWidth="110.0" text="Altura" />
       <TextField fx:id="textFieldAltura" layoutX="381.0" layoutY="86.0" promptText="Altura" />
       <TextField fx:id="textFieldFuerza" layoutX="381.0" layoutY="136.0" promptText="Fuerza" />
@@ -30,5 +29,7 @@
       <TextField fx:id="textFieldVelocidad" layoutX="381.0" layoutY="286.0" promptText="Velocidad" />
       <Label alignment="CENTER" layoutX="15.0" layoutY="366.0" prefHeight="25.0" prefWidth="110.0" text="Card name" />
       <Text fx:id="textError" layoutX="41.0" layoutY="526.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Errors will appear here." wrappingWidth="505.3310546875" />
+      <Text fx:id="textCtype" layoutX="381.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CardType" />
+      <Label layoutX="329.0" layoutY="44.0" text="Type" />
    </children>
 </AnchorPane>

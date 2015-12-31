@@ -14,7 +14,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public class CreateCardViewController {
+public class CreateCardController {
 	@FXML
 	private TextField textFieldCardName;
 	@FXML
@@ -45,6 +45,7 @@ public class CreateCardViewController {
 	public void initialize() {
 		CardType superheroes = CardTypeFactory.fromFile("Superheroes");
 		comboBoxCtype.getItems().add(superheroes);
+		comboBoxCtype.setValue(superheroes);
 	}
 
 	@FXML
