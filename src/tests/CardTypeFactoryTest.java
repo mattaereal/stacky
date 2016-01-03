@@ -6,7 +6,6 @@ import org.junit.Test;
 
 import cards.CardType;
 import cards.factories.CardTypeFactory;
-import utils.Util;
 
 public class CardTypeFactoryTest {
 

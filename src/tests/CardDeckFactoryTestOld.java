@@ -1,6 +1,7 @@
 package tests;
 
-import static org.junit.Assert.*;
+import static org.
+junit.Assert.*;
 
 import org.junit.Test;
 
@@ -10,6 +11,7 @@ import cards.CardType;
 import cards.CompositeCard;
 import cards.factories.CardDeckFactory;
 
+@SuppressWarnings("unused")
 public class CardDeckFactoryTestOld {
 
 	public void testFromAndToFile() {

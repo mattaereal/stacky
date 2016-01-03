@@ -1,6 +1,7 @@
 package controller.decks;
 
 import java.util.HashMap;
+
 import java.util.Iterator;
 
 import cards.AbstractCard;
@@ -18,7 +19,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-import javafx.stage.Window;
 
 public class DecksViewController {
 	@FXML
