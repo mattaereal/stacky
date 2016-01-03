@@ -6,9 +6,11 @@ import java.util.Iterator;
 import application.Main;
 import cards.AbstractCard;
 import cards.CardDBHandler;
-
+import cards.CardType;
 import cards.factories.CardDBHandlerFactory;
+import cards.factories.CardTypeFactory;
 import controller.cards.create.CreateCardController;
+import controller.cards.edit.EditCardController;
 import controller.game.GameController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -16,9 +18,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.chart.PieChart.Data;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
@@ -112,10 +116,18 @@ public class CardsViewController {
 			e.printStackTrace();
 		}
 		
-		Stage stage = new Stage();
-		Scene scene = new Scene(pane);
-		stage.setScene(scene);
-		stage.show();
+		EditCardController controller = loader.getController();
+		AbstractCard curr = tvCards.getSelectionModel().getSelectedItem();
+		CardType superheroes = CardTypeFactory.fromFile("Superheroes");
+		if (!curr.getCtype().equals(superheroes)) {
+			this.dialogError("Can't edit card that kind of card.");
+		} else {
+			controller.setupCreation(cardHandler, data, curr);
+			Stage stage = new Stage();
+			Scene scene = new Scene(pane);
+			stage.setScene(scene);
+			stage.show();
+		}
 	}
 	
 	@FXML
@@ -128,5 +140,14 @@ public class CardsViewController {
 	public void cancelAction() {
 	    Stage stage = (Stage) buttonCancel.getScene().getWindow();
 	    stage.close();
+	}
+	
+	public void dialogError(String err) {
+		Alert alert = new Alert(AlertType.ERROR);
+		alert.setTitle("Error");
+		alert.setContentText(err);
+		alert.setResizable(true);
+
+		alert.showAndWait();
 	}
 }

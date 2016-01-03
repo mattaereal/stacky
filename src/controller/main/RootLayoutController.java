@@ -12,6 +12,7 @@ import game.strategies.PlayerInteractiveStrategy;
 import game.strategies.PlayerRandomStrategy;
 import game.strategies.PlayerStaticStrategy;
 import game.strategies.PlayerStrategy;
+import controller.decks.DecksViewController;
 import controller.game.GameController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -114,11 +115,13 @@ public class RootLayoutController {
 			e.printStackTrace();
 		}
 		
+		DecksViewController controller = loader.getController();
 		Stage stage = new Stage();
 		Scene scene = new Scene(pane);
 		stage.setScene(scene);
 		stage.show();
 		
+		controller.setData();		
 	}
 	
 	@FXML
