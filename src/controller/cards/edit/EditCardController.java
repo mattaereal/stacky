@@ -81,6 +81,7 @@ public class EditCardController {
 			newCard.addAttribute("Peso", Integer.parseInt(peso));
 			newCard.addAttribute("Peleas ganadas", Integer.parseInt(peleas));
 			newCard.addAttribute("Velocidad", Integer.parseInt(velocidad));
+			newCard.setNewUUID(current.getID());
 			cdbHandler.addCard(newCard);
 			viewData.add(newCard);
 			

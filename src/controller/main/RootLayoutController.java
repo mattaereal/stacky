@@ -17,10 +17,12 @@ import controller.game.GameController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
@@ -193,5 +195,14 @@ public class RootLayoutController {
 		borderPaneContainer.setCenter(pane);
 	}
 	
+	public void aboutDialog() {
+		Alert alert = new Alert(AlertType.INFORMATION);
+		alert.setTitle("About");
+		alert.setHeaderText("Message from the author:");
+		alert.setContentText("A final project for OOP chair @ UNICEN. \nBy Matías A. Ré Medina.");
+		alert.setResizable(true);
+
+		alert.showAndWait();
+	}
 
 }

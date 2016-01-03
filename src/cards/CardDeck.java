@@ -6,7 +6,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 import java.util.UUID;
+import java.util.logging.Logger;
 
+import application.Main;
 import game.Player;
 import utils.Util;
 
@@ -16,6 +18,7 @@ public class CardDeck {
 	private List<UUID> deck_ids;
 	private CardType ctype;
 	private String name;
+	static Logger logger = Logger.getLogger(Main.class.getName());
 
 	/**
 	 * Constructor of a card deck. It represents
@@ -292,8 +295,14 @@ public class CardDeck {
 	
 	private ArrayList<AbstractCard> cloneList() {
 	    ArrayList<AbstractCard> clone = new ArrayList<AbstractCard>(deck.size());
-	    for(AbstractCard card: deck) 
+	    for(AbstractCard card: deck) {
+	    	logger.info("Deck: " + this.name + ". Adding cloned card: " + card);
+	    	if (card == null) {
+	    		logger.info("Deck: " + this.name + ". Null card detected");
+	    		continue; //TODO: Hardfix, ver por qué vienen cartas null?
+	    	}
 	    	clone.add((AbstractCard) card.clone());
+	    }
 	    return clone;
 	}
 	

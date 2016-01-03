@@ -25,6 +25,10 @@ public abstract class AbstractCard {
 		return this.id;
 	}
 	
+	public void setNewUUID(UUID id) {
+		this.id = id;
+	}
+	
 	public String getName() {
 		
 		return name;

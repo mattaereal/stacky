@@ -13,6 +13,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.Labeled;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
@@ -63,6 +64,8 @@ public class GameController {
 	
 	@FXML
 	private Button buttonHand;
+	@FXML
+	private Text textHiddenCard;
 	
 	public void setGame() {
 		this.game = new Game(player1, player2, cardDeck, gameCrit);
@@ -75,10 +78,15 @@ public class GameController {
 	}
 	
 	public void setPlayer1(Player p1) {
-		this.player1 = p1;
+		if (p1.getName().equals(""))
+			p1.setName("Player 1");
+		this.player1 = p1; 
+		
 	}
 	
 	public void setPlayer2(Player p2) {
+		if (p2.getName().equals(""))
+			p2.setName("Player 2");
 		this.player2 = p2;
 	}
 	
@@ -102,10 +110,8 @@ public class GameController {
 	
 	public void loadGame() {
 		setGame();
-		textPlayer1Card.setText((player1.peek().getAttributes()));
-		textPlayer2Card.setText((player2.peek().getAttributes()));
-		textPlayer1.setText(player1.toString());
-		textPlayer2.setText(player2.toString());
+		textPlayer1.setText(player1.getName());
+		textPlayer2.setText(player2.getName());
 	}
 	
 	@FXML
@@ -113,6 +119,7 @@ public class GameController {
 		textCardsInPool.setText(String.format("%d", game.tiePool.size()));
 		textRemainingCardsP1.setText(String.format("%d", player1.getRemainingCards()));
 		textRemainingCardsP2.setText(String.format("%d", player2.getRemainingCards()));
+		AbstractCard tmp;
 		
 		if (firstHand) {
 			firstHand = false;
@@ -127,8 +134,10 @@ public class GameController {
 			}
 			
 			textPlayerTurn.setText(player_turn.toString());
-			textPlayer1Card.setText((player1.peek().getAttributes()));
-			textPlayer2Card.setText((player2.peek().getAttributes()));
+			if (player_turn.equals(player1))
+				textPlayer1Card.setText((player1.peek().getAttributes()));
+			else
+				textPlayer2Card.setText((player2.peek().getAttributes()));
 		} else {
 			if (!game.hasEnded(player1, player2)) {
 				if (player1.hasCards() && player2.hasCards()) {
@@ -138,20 +147,24 @@ public class GameController {
 						preferedAtrribute = getInteractiveAttr(player_turn.peek());
 					} 
 					
+					tmp = getOther(player_turn).peek();
 					player_turn.getgStrategy().setupNextPlay(player_turn.peek(), game.getGameRecord(), preferedAtrribute, gameCrit);
 					player_turn = game.hand(player_turn, player1, player2, gameCrit);
 					textPlayerTurn.setText(player_turn.toString());
+
+					textHiddenCard.setText(tmp.getAttributes());
+					
 			
-					if (player1.hasCards()) {
+					if (player1.hasCards() && player_turn.equals(player1)) {
 						textPlayer1Card.setText((player1.peek().getAttributes()));
 					} else {
-						textPlayer1Card.setText("No more cards.");
+						textPlayer1Card.setText("Nothing to show.");
 					}
 					
-					if (player2.hasCards()) {
+					if (player2.hasCards() && player_turn.equals(player2)) {
 						textPlayer2Card.setText((player2.peek().getAttributes()));
 					} else {
-						textPlayer2Card.setText("No more cards.");
+						textPlayer2Card.setText("Nothing to show.");
 					}
 				}
 			} else {
@@ -190,6 +203,12 @@ public class GameController {
 		}
 		
 		return attributes.get(buttons.indexOf(result.get()));
+	}
+	
+	public Player getOther(Player p) {
+		if (player1.equals(p))
+			return player2;
+		return player1;
 	}
 
 	@FXML

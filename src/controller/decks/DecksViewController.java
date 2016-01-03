@@ -1,5 +1,6 @@
 package controller.decks;
 
+import java.util.HashMap;
 import java.util.Iterator;
 
 import cards.AbstractCard;
@@ -10,10 +11,14 @@ import cards.factories.CardDeckFactory;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
+import javafx.stage.Window;
 
 public class DecksViewController {
 	@FXML
@@ -23,7 +28,7 @@ public class DecksViewController {
 	@FXML
 	private Button buttonPersist;
 	@FXML
-	private Button buttonCancel;
+	private Button buttonClose;
 	@FXML
 	private TableView<AbstractCard> tvCardsDB;
 	@FXML
@@ -40,38 +45,62 @@ public class DecksViewController {
 	private TableColumn<AbstractCard, String> itemCardTypeR;
 	@FXML
 	private TableColumn<CardDeck, String> itemCardNameM;
-	@FXML
-	private TableColumn<CardDeck, String> itemCardTypeM;
 	
 	private CardDBHandler cardHandler;
 	private final ObservableList<AbstractCard> dataLeft = FXCollections.observableArrayList();
 	private final ObservableList<AbstractCard> dataRight = FXCollections.observableArrayList();
 	private final ObservableList<CardDeck> dataMid = FXCollections.observableArrayList();
 	
+	private HashMap<CardDeck, String> deckPath;
+	
 	@FXML
 	public void initialize() {
-		setCardsFromDB();
-		
-
+		deckPath = new HashMap<CardDeck, String>();
 	}
 	
 	@FXML
 	public void addCardToDeckAction() {
+		AbstractCard card = tvCardsDB.getFocusModel().getFocusedItem();
+		CardDeck deck = tvDecks.getFocusModel().getFocusedItem();
+		try {
+			deck.addCard(card);
+			dataRight.add(card);
+		} catch (Exception e) {
+			dialogError(e + ". Select a card from the DB and a deck where to add it.");
+		}
 		
 	}
 	
 	@FXML
 	public void deleteCardFromDeckAction() {
-		
+		AbstractCard card = tvCardsFromDeck.getFocusModel().getFocusedItem();
+		CardDeck deck = tvDecks.getFocusModel().getFocusedItem();
+		try {
+			deck.delCard(card);
+			dataRight.remove(card);
+		} catch (Exception e) {
+			dialogError(e + ". Select a card and a deck from it first.");
+		}
 	}
 	
 	@FXML
 	public void persistAction() {
+		Iterator<CardDeck> it = tvDecks.getItems().iterator();
+		CardDeck curr;
+		while (it.hasNext()) {
+			curr = it.next();
+			CardDeckFactory.toFile(deckPath.get(curr), curr);
+		}
 		
+		dataMid.clear();
+		dataLeft.clear();
+        setData();
 	}
 	
 	@FXML
-	public void cancelAction() {
+	public void closeAction() {
+		Stage stage = (Stage) buttonClose.getScene().getWindow();
+		stage.close();
 		
 	}
 	
@@ -103,16 +132,18 @@ public class DecksViewController {
 	
 	public void setDecks() {
 		itemCardNameM.setCellValueFactory(
-                new PropertyValueFactory<CardDeck, String>("name"));
- 
-        itemCardTypeM.setCellValueFactory(
-                new PropertyValueFactory<CardDeck, String>("ctype"));
-        
-        CardDeck test = CardDeckFactory.fromFile("db/decks/DeckTest1.xml");
+                new PropertyValueFactory<CardDeck, String>("name"));    
+		// TODO: Hardcoded, should be getting them from default folder file.
+		
         CardDeck cars = CardDeckFactory.fromFile("db/decks/cars.xml");
+        deckPath.put(cars, "db/decks/cars.xml");
+        
         CardDeck sh_classic = CardDeckFactory.fromFile("db/decks/superheroes_classic.xml");
+        deckPath.put(sh_classic, "db/decks/superheroes_classic.xml");
+        
         CardDeck sh = CardDeckFactory.fromFile("db/decks/superheroes.xml");
-        dataMid.add(test);
+        deckPath.put(sh, "db/decks/superheroes.xml");
+        
         dataMid.add(cars);
         dataMid.add(sh_classic);
         dataMid.add(sh);
@@ -137,6 +168,16 @@ public class DecksViewController {
 	
 	public void setData() {
 		setCardsFromDB();
+		setDecks();
 		setCardsFromDeck();
+	}
+	
+	public void dialogError(String err) {
+		Alert alert = new Alert(AlertType.ERROR);
+		alert.setTitle("Error");
+		alert.setContentText(err);
+		alert.setResizable(true);
+
+		alert.showAndWait();
 	}
 }

@@ -20,7 +20,7 @@
          </columnResizePolicy>
       </TableView>
       <Button fx:id="buttonPersist" alignment="CENTER" layoutX="530.0" layoutY="393.0" mnemonicParsing="false" onMousePressed="#persistAction" prefWidth="97.0" text="Save" />
-      <Button fx:id="buttonCancel" alignment="CENTER" layoutX="530.0" layoutY="443.0" mnemonicParsing="false" onMousePressed="#cancelAction" prefWidth="97.0" text="Cancel" />
+      <Button fx:id="buttonClose" alignment="CENTER" layoutX="530.0" layoutY="443.0" mnemonicParsing="false" onMousePressed="#closeAction" prefWidth="97.0" text="Close" />
       <TableView fx:id="tvCardsFromDeck" layoutX="735.0" layoutY="25.0" prefHeight="550.0" prefWidth="400.0">
          <columnResizePolicy>
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -35,7 +35,7 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
          <columns>
-            <TableColumn fx:id="itemCardName11" prefWidth="75.0" text="Deck name" />
+            <TableColumn fx:id="itemCardNameM" prefWidth="75.0" text="Deck name" />
          </columns>
       </TableView>
    </children>

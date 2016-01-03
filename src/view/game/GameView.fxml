@@ -12,32 +12,32 @@
    <center>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <Label layoutX="331.0" layoutY="65.0" text="Game on!">
+            <Label layoutX="351.0" layoutY="65.0" text="Game on!">
                <font>
                   <Font size="66.0" />
                </font>
             </Label>
-            <Button fx:id="buttonEndGame" layoutX="470.0" layoutY="674.0" mnemonicParsing="false" onMousePressed="#endGame" text="End game" />
-            <Button fx:id="buttonHand" layoutX="487.0" layoutY="612.0" mnemonicParsing="false" onMousePressed="#playHand" text="Hand" />
+            <Button fx:id="buttonEndGame" layoutX="470.0" layoutY="709.0" mnemonicParsing="false" onMousePressed="#endGame" text="End game" />
+            <Button fx:id="buttonHand" layoutX="485.0" layoutY="674.0" mnemonicParsing="false" onMousePressed="#playHand" text="Hand" />
             <Text fx:id="textPlayer1Card" layoutX="85.0" layoutY="558.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Top card data" />
             <Text fx:id="textPlayer2Card" layoutX="661.0" layoutY="558.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Top card data" />
-            <Text fx:id="textPlayer1" layoutX="-27.0" layoutY="434.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Player #1" textAlignment="CENTER" wrappingWidth="460.0">
+            <Text fx:id="textPlayer1" layoutX="66.0" layoutY="414.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="2.0" text="Player #1" textAlignment="LEFT" wrappingWidth="300.0">
                <font>
                   <Font name="DejaVu Sans ExtraLight" size="56.0" />
                </font>
             </Text>
-            <Text fx:id="textPlayer2" layoutX="550.0" layoutY="434.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Player #2" textAlignment="CENTER" wrappingWidth="460.0">
+            <Text fx:id="textPlayer2" layoutX="653.0" layoutY="414.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="2.0" text="Player #2" textAlignment="RIGHT" wrappingWidth="300.0">
                <font>
                   <Font name="DejaVu Sans ExtraLight" size="56.0" />
                </font>
             </Text>
-            <Text fx:id="textPlayerTurn" layoutX="466.0" layoutY="250.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nobody">
+            <Text fx:id="textPlayerTurn" layoutX="476.0" layoutY="249.953125" strokeType="OUTSIDE" strokeWidth="0.0" text="Nobody">
                <font>
                   <Font size="18.0" />
                </font>
             </Text>
-            <Label layoutX="454.0" layoutY="210.0" text="Turn of player:" />
-            <Text fx:id="textPlayerWon" layoutX="468.0" layoutY="552.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nobody">
+            <Label layoutX="464.0" layoutY="199.0" text="Turn of player:" />
+            <Text fx:id="textPlayerWon" layoutX="454.0" layoutY="552.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nobody" textAlignment="CENTER" AnchorPane.leftAnchor="470.0">
                <font>
                   <Font size="24.0" />
                </font>
@@ -48,8 +48,8 @@
             <Label layoutX="456.0" layoutY="427.0" text="# cards in pool:" />
             <Label layoutX="72.0" layoutY="462.0" text="Remaining cards:" />
             <Label layoutX="648.0" layoutY="462.0" text="Remaining cards:" />
-            <Label layoutX="468.0" layoutY="505.0" text="Winner:" />
-            <Label layoutX="454.0" layoutY="299.0" text="VS">
+            <Label layoutX="472.0" layoutY="510.0" text="Winner:" AnchorPane.leftAnchor="470.0" />
+            <Label layoutX="460.0" layoutY="330.0" text="VS" AnchorPane.leftAnchor="460.0">
                <font>
                   <Font size="79.0" />
                </font>
@@ -59,11 +59,12 @@
                   <Image url="@../../../db/img/6090801-media_httpdefinitivet_aImaA.jpg" />
                </image>
             </ImageView>
-            <ImageView fitHeight="200.0" fitWidth="178.0" layoutX="699.0" layoutY="143.0">
+            <ImageView fitHeight="200.0" fitWidth="178.0" layoutX="769.0" layoutY="143.0">
                <image>
                   <Image url="@../../../db/img/superman-facebook.jpg" />
                </image>
             </ImageView>
+            <Text fx:id="textHiddenCard" layoutX="473.0" layoutY="582.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hidden card." />
          </children>
       </AnchorPane>
    </center>

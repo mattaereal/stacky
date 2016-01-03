@@ -132,8 +132,11 @@ public class CardsViewController {
 	
 	@FXML
 	public void updateAttributes() {
-		System.out.println(tvCards.getSelectionModel().getSelectedItem().getAttributes());
-		textCurrentAttrs.setText(tvCards.getSelectionModel().getSelectedItem().getAttributes());
+		try {
+			textCurrentAttrs.setText(tvCards.getSelectionModel().getSelectedItem().getAttributes());
+		} catch (Exception NullPointerException) {
+			// Nothing to do.
+		}
 	}
 	
 	@FXML
