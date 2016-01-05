@@ -20,7 +20,7 @@ public class CardTypeFactory {
     private static BufferedReader br;
     
     public static CardType fromFile(String name) {
-    	String path = Util.ctypepath + name + ".xml"; 
+    	String path = Util.ctypepath + name + Util.fileext; 
         try {
             XStream xstream = new XStream(new StaxDriver());
             br = new BufferedReader(new FileReader(path));
@@ -42,7 +42,7 @@ public class CardTypeFactory {
     }
     
     public static boolean toFile(String name, CardType ct) {
-    	String path = Util.ctypepath + name + ".xml"; 
+    	String path = Util.ctypepath + name + Util.fileext; 
         XStream xstream = new XStream(new StaxDriver());
         String xml = xstream.toXML(ct);
         try {

@@ -14,6 +14,7 @@ import com.thoughtworks.xstream.io.xml.StaxDriver;
 import application.Main;
 import cards.CardDBHandler;
 import cards.CardDeck;
+import utils.Util;
 
 public class CardDeckFactory {
 	static Logger logger = Logger.getLogger(Main.class.getName());
@@ -26,26 +27,7 @@ public class CardDeckFactory {
 	 * @return CardDeck.
 	 */
 	public static CardDeck fromFile(String path) {
-		try {
-			XStream xstream = new XStream(new StaxDriver());
-			br = new BufferedReader(new FileReader(path));
-			String xml = "";
-			String sCurrentLine;
-									
-			while ((sCurrentLine = br.readLine()) != null) {
-				xml += sCurrentLine+"\n";
-			}
-			
-			CardDeck deck = (CardDeck) xstream.fromXML(xml);
-			logger.info("Deck loaded from " + path);
-			CardDBHandler cdh = CardDBHandlerFactory.fromFile(); //hardcoded
-			deck.load(cdh);
-			return deck;
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
-		return null;
+		return fromFileWithDB(path, null);
 	}
 	
 	/**
@@ -57,6 +39,7 @@ public class CardDeckFactory {
 	 * @return CardDeck.
 	 */
 	public static CardDeck fromFileWithDB(String path, String db) {
+		path = Util.deckspath + path; 
 		try {
 			XStream xstream = new XStream(new StaxDriver());
 			br = new BufferedReader(new FileReader(path));
@@ -69,7 +52,13 @@ public class CardDeckFactory {
 			
 			CardDeck deck = (CardDeck) xstream.fromXML(xml);
 			logger.info("Deck loaded from " + path);
-			CardDBHandler cdh = CardDBHandlerFactory.fromFile(db);
+			CardDBHandler cdh;
+			if (db == null) {
+				cdh = CardDBHandlerFactory.fromFile();
+			} else {
+				cdh = CardDBHandlerFactory.fromFile(db);	
+			}
+			
 			deck.load(cdh);
 			return deck;
 		} catch (IOException e) {
@@ -88,6 +77,7 @@ public class CardDeckFactory {
 	 * @return True if it saved correctly. False otherwise.
 	 */
 	public static boolean toFile(String path, CardDeck cd) {
+		path = Util.deckspath + path;
 		XStream xstream = new XStream(new StaxDriver());
 		cd.clear();
 		String xml = xstream.toXML(cd);

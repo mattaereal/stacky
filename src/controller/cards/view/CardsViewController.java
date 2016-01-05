@@ -1,4 +1,4 @@
-package controller.cards;
+package controller.cards.view;
 
 import java.io.IOException;
 import java.util.Iterator;
@@ -9,6 +9,7 @@ import cards.CardDBHandler;
 import cards.CardType;
 import cards.factories.CardDBHandlerFactory;
 import cards.factories.CardTypeFactory;
+import controller.cards.composite.CompositeCardController;
 import controller.cards.create.CreateCardController;
 import controller.cards.edit.EditCardController;
 import javafx.collections.FXCollections;
@@ -43,6 +44,8 @@ public class CardsViewController {
 	private Button buttonCancel;
 	@FXML
 	private Button buttonPersist;
+	@FXML
+	private Button buttonCreateCompositeCard;
 	@FXML
 	private Text textCurrentAttrs;
 	
@@ -127,6 +130,26 @@ public class CardsViewController {
 			stage.show();
 		}
 	}
+	
+	@FXML
+	public void openCreateCompositeView() {
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(Main.class.getResource("/view/cards/composite/CardCompositeView.fxml"));
+		AnchorPane pane = null;
+		try {
+			pane = loader.load();
+		} catch(IOException e){
+			e.printStackTrace();
+		}
+		
+		CompositeCardController controller = loader.getController();
+		controller.setCardList(data);
+		controller.setHandler(cardHandler);
+		Stage stage = new Stage();
+		Scene scene = new Scene(pane);
+		stage.setScene(scene);
+		stage.show();
+	}	
 	
 	@FXML
 	public void updateAttributes() {

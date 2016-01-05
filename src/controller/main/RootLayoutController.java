@@ -1,5 +1,6 @@
 package controller.main;
 
+import java.io.File;
 import java.io.IOException;
 import application.Main;
 import cards.CardDeck;
@@ -26,6 +27,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import utils.Util;
 
 public class RootLayoutController {
 	
@@ -77,14 +79,16 @@ public class RootLayoutController {
 		comboBoxStrategyPlayer2.getItems().add(new PlayerInteractiveStrategy());
 		
 		// Deck
-		CardDeck superheroes = CardDeckFactory.fromFile("db/decks/superheroes.xml");
-		CardDeck classic_sh = CardDeckFactory.fromFile("db/decks/superheroes_classic.xml");
-		CardDeck cars = CardDeckFactory.fromFile("db/decks/cars.xml");
 		
-		comboBoxDeck.getItems().add(superheroes);
-		comboBoxDeck.getItems().add(classic_sh);
-		comboBoxDeck.getItems().add(cars);
-		
+		File folder = new File(Util.deckspath);
+		File[] listOfFiles = folder.listFiles();
+		    for (int i = 0; i < listOfFiles.length; i++) {
+		      if (listOfFiles[i].isFile()) {
+		        CardDeck tmp = CardDeckFactory.fromFile(listOfFiles[i].getName());
+		        comboBoxDeck.getItems().add(tmp);
+		      }
+		    }
+		    
 		textFieldLimit.setText("100");
 	}
 	

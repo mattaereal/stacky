@@ -38,5 +38,10 @@
             <TableColumn fx:id="itemCardNameM" prefWidth="75.0" text="Deck name" />
          </columns>
       </TableView>
+      <TextField fx:id="textFieldDeckName" layoutX="443.0" layoutY="511.0" promptText="New deck name" />
+      <Button fx:id="buttonCreateDeck" layoutX="647.0" layoutY="511.0" mnemonicParsing="false" onMouseReleased="#createDeck" text="Create" />
+      <ComboBox fx:id="comboBoxCtype" layoutX="455.0" layoutY="546.0" prefWidth="150.0" />
+      <Label layoutX="530.0" layoutY="489.0" text="Deck creation" />
+      <Button fx:id="buttonDeleteDeck" layoutX="548.0" layoutY="38.0" mnemonicParsing="false" onMouseReleased="#deleteDeck" text="Delete" />
    </children>
 </AnchorPane>
