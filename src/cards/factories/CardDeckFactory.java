@@ -32,10 +32,11 @@ public class CardDeckFactory {
 	
 	/**
 	 * Gathers from file a CardDeck. Also loads the cards from
-	 * specific  db. It's replicated code, but the inteded use
+	 * specific  db. It's replicated code, but the intended use
 	 * is mainly for tests.
 	 * 
 	 * @param path Where to retrieve the deck from.
+	 * @param db Database name.
 	 * @return CardDeck.
 	 */
 	public static CardDeck fromFileWithDB(String path, String db) {

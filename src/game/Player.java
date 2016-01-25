@@ -64,7 +64,7 @@ public class Player {
 
 	/**
 	 * Set the Game Strategy to be used by the player.
-	 * @param gStrategy
+	 * @param gStrategy Game strategy
 	 */
 	public void setgStrategy(PlayerStrategy gStrategy) {
 		this.gStrategy = gStrategy;
@@ -94,7 +94,7 @@ public class Player {
 	
 	/**
 	 * Gets the used cards deck.
-	 * @return
+	 * @return CardDeck
 	 */
 	public CardDeck getUsedDeck() {
 		return used_deck;
@@ -150,7 +150,7 @@ public class Player {
 
 	/**
 	 * Saves a pile of cards with the rest of the deck.
-	 * @param pile 
+	 * @param pile ArrayList of cards
 	 */
 	public void saveCards(ArrayList<AbstractCard> pile) {
 		this.used_deck.addCards(pile);
@@ -158,7 +158,8 @@ public class Player {
 
 	/**
 	 * Selects an attribute based on the strategy.
-	 * @return An attribute.
+	 * @param current Current card
+	 * @return An attribute
 	 */
 	public String selectAttribute(AbstractCard current) {
 
@@ -207,18 +208,36 @@ public class Player {
 		return true;
     }
 
+    /**
+     * Sets a place where to store what the player is watching
+     * from each hand.
+     * @param gameRecord GameRecord
+     */
 	public void setFeedback(GameRecord gameRecord) {
 		this.feedback = gameRecord;
 	}
 	
+	/**
+	 * Gets feedback from what the player saw in the played hands.
+	 * @return GameRecord
+	 */
 	public GameRecord getFeedback() {
 		return this.feedback;
 	}
 	
+	/**
+	 * Returns deck name and the quantity of the cards in it.
+	 * @see java.lang.Object#toString()
+	 * 
+	 */
 	public String toString() {
 		return this.getName();
 	}
 	
+	/**
+	 * Peeks the first card of a player's deck.
+	 * @return Card
+	 */
 	public AbstractCard peek() {
 		if (hasCards()) {
 			if (current_deck.isEmpty()) {
@@ -234,6 +253,10 @@ public class Player {
 		return null;
 	}
 	
+	/**
+	 * Gets the total amount of the cards in a players possession.
+	 * @return Amount of total card.
+	 */
 	public int getRemainingCards() {
 		
 		return current_deck.size() + used_deck.size();

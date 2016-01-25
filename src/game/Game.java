@@ -20,6 +20,14 @@ public class Game {
 	private int limit = 100;
 	private int handCount = 0;
 	
+	/**
+	 * Game constructor. 
+	 * 
+	 * @param p1 Player one.
+	 * @param p2 Player two.
+	 * @param cd CardDeck.
+	 * @param gCrit GameCriterion.
+	 */
 	public Game(Player p1, Player p2, CardDeck cd, GameCriterion gCrit) {
 		this.deck = cd;
 		this.gcrit = gCrit;
@@ -49,15 +57,27 @@ public class Game {
 		deck.split(p1, p2);
 	}
 	
+	/**
+	 * Sets a limit on how many hands can be played max.
+	 * @param lim Int limit to be set.
+	 */
 	public void setLimit(int lim) {
 		this.limit = lim;
 	}
 	
+	/**
+	 * Gets the hands limit.
+	 * @return limit.
+	 */
 	public int getLimit() {
 		
 		return limit;
 	}
 	
+	/**
+	 * Gets the count of how many hands were already played.
+	 * @return Hand count.
+	 */
 	public int getHandCount() {
 		
 		return handCount;
@@ -65,6 +85,11 @@ public class Game {
 		
 		
 	/**
+	 * Plays a hand.
+	 * The player that has the turn gets selects an attribute and battles
+	 * the other card on that attribute. The winner will be returned as a 
+	 * reference to that Player, and the card/s won will be assigned to
+	 * his deck for future use.
 	 * 
 	 * @param turn Player who owns the turn.
 	 * @param p1 Player one.
@@ -117,18 +142,34 @@ public class Game {
 		
 	}
 	
+	/**
+	 * Checks whether the last hand was a tie or not.
+	 * @return True if it was, False otherwise.
+	 */
 	public boolean isTie() {
 		
 		return this.tie;
 	}
 	
+	/**
+	 * End condition for the game. 
+	 * Checks whether the amount of hands already played does not
+	 * surpass the set limit and if one of the players ran out of cards.
+	 * 
+	 * @param p1 Player one
+	 * @param p2 Player two
+	 * @return True if it has to end, False otherwise.
+	 */
 	public boolean hasEnded(Player p1, Player p2) {
 		
 		return ((this.getHandCount() >= this.getLimit()) || (p1.getRemainingCards() == 0) || (p2.getRemainingCards() == 0));
 	}
 	
-	
-   @Override
+	/**
+	 * Checks whether 2 card types are equal.
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
     public boolean equals(final Object obj) {
         if (this == obj)
             return true;
@@ -150,19 +191,32 @@ public class Game {
 		return true;
     }
 	
-   @Override
-   public int hashCode() {
-       final int prime = 31;
-       int result = 1;
-       result = prime * result
+	/**
+	 * HashCode.
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result
                + this.deck.hashCode();
-       return result;
+		
+		return result;
    }
 
+	/**
+	 * Gets game record.
+	 * @return GameRecord
+	 */
 	public GameRecord getGameRecord() {
 		return gameRecord;
 	}
 	
+	/**
+	 * Sets game record.
+	 * @param gameRecord
+	 */
 	private void setGameRecord(GameRecord gameRecord) {
 		this.gameRecord = gameRecord;
 	}

@@ -19,6 +19,12 @@ public class CardTypeFactory {
 	static Logger logger = Logger.getLogger(Main.class.getName());
     private static BufferedReader br;
     
+	/**
+	 * Gathers from file a CardType. 
+	 * 
+	 * @param name Name of the card type to retrieve.
+	 * @return CardType.
+	 */
     public static CardType fromFile(String name) {
     	String path = Util.ctypepath + name + Util.fileext; 
         try {
@@ -41,6 +47,12 @@ public class CardTypeFactory {
         return null;
     }
     
+	/**
+	 * Saves a card type to an XML file.
+	 * 
+	 * @param ct CardType to save.
+	 * @return True if it saved correctly. False otherwise.
+	 */
     public static boolean toFile(String name, CardType ct) {
     	String path = Util.ctypepath + name + Util.fileext; 
         XStream xstream = new XStream(new StaxDriver());

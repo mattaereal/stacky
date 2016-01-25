@@ -5,7 +5,6 @@ import java.util.Iterator;
 import cards.AbstractCard;
 import cards.CardDBHandler;
 import cards.CompositeCard;
-import cards.factories.CardDBHandlerFactory;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;

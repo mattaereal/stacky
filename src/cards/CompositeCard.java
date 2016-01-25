@@ -10,16 +10,30 @@ import utils.Util;
 public class CompositeCard extends AbstractCard {
 	private List<AbstractCard> cards;
 
+	/**
+	 * CompositeCard constructor.
+	 * @param name Name of the card.
+	 * @param ctype CardType of the card.
+	 */
 	public CompositeCard(String name, CardType ctype) {
 		super(name, ctype);
 		cards = new ArrayList<AbstractCard>();
 	}
 
+	/**
+	 * Gets all the Cards in the composite.
+	 * @return List of AbstractCards.
+	 */
 	public List<AbstractCard> getCards() {
 		
 		return cards;
 	}
 	
+	/**
+	 * Gets the value of an attribute.
+	 * @param name Name of the attribute.
+	 * @return Attribute's value.
+	 */
 	@Override
 	public Integer getAttribute(String name) {
 		int sum = 0;
@@ -38,6 +52,11 @@ public class CompositeCard extends AbstractCard {
 		return (new Integer(sum / q));
 	}
 	
+	/**
+	 * Adds an AbstractCard to the composite.
+	 * @param card AbstractCard to be added.
+	 * @throws RuntimeException
+	 */
 	public void addCard(AbstractCard card) throws RuntimeException {
 		if (card.getCtype().equals(this.getCtype())) {
 			this.cards.add(card);
@@ -46,6 +65,10 @@ public class CompositeCard extends AbstractCard {
 		}
 	}
 	
+	/**
+	 * Deletes an AbstractCard from the composite.
+	 * @param name Name of the card to be deleted.
+	 */
 	public void delCard(String name) {
 		/* Deletes the first occurrence */
 		name = Util.capitalize(name);
@@ -60,10 +83,18 @@ public class CompositeCard extends AbstractCard {
 		 }
 	}
 	
+	/**
+	 * Deletes an AbstractCard from the composite.
+	 * @param card AbstractCard of the card to be deleted.
+	 */
 	public void delCard(AbstractCard card) {
 		this.cards.remove(card);
 	}
 
+	/**
+	 * Clones the object.
+	 * @see java.lang.Object#clone()
+	 */
 	@Override
 	public Object clone() {
 		CompositeCard newCard = new CompositeCard(name, ctype);
@@ -71,6 +102,10 @@ public class CompositeCard extends AbstractCard {
 		return newCard;
 	}
 
+	/**
+	 * Displays all the attributes and their
+	 * values via stdout.
+	 */
 	@Override
 	public void printAttributes() {
 		System.out.println("["+this.getName()+"]");
@@ -80,6 +115,10 @@ public class CompositeCard extends AbstractCard {
 		System.out.println();
 	}
 	
+	/**
+	 * Gets all attributes concatenated in a String.
+	 * @return Attributes.
+	 */
 	@Override
 	public String getAttributes() {
 		String buff = "["+this.getName()+"]";

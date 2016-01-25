@@ -148,7 +148,7 @@ public class CardDeck {
 	}
 	
 	/**
-	 * Equals.
+	 * Checks whether 2 decks are equal.
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	public boolean equals(final Object obj) {
@@ -197,6 +197,7 @@ public class CardDeck {
     }
 
 	/**
+	 * Gets the Deck name.
 	 * @return the name
 	 */
 	public String getName() {
@@ -267,7 +268,7 @@ public class CardDeck {
 	
 	/**
 	 * Adds a list of AbstractCards to the deck
-	 * @param list ArrayList<AbstractCard> to be added.
+	 * @param list ArrayList of AbstractCards to be added.
 	 */
 	public void addCards(List<AbstractCard> list) {
 		this.deck.addAll(list);
@@ -289,10 +290,18 @@ public class CardDeck {
 		this.deck_ids.clear();
 	}
 	
+	/**
+	 * Clones the object.
+	 * @see java.lang.Object#clone()
+	 */
 	public Object clone() {
 		return new CardDeck(name, ctype, cloneList());
 	}
 	
+	/**
+	 * Clones the current deck list.
+	 * @return A cloned list.
+	 */
 	private ArrayList<AbstractCard> cloneList() {
 	    ArrayList<AbstractCard> clone = new ArrayList<AbstractCard>(deck.size());
 	    for(AbstractCard card: deck) {
@@ -306,6 +315,10 @@ public class CardDeck {
 	    return clone;
 	}
 	
+	/**
+	 * Mostly used for debug purposes.
+	 * Prints the cards the their type on the db.
+	 */
 	public void printCards() {
 		Iterator<AbstractCard> it = this.deck.iterator();
 		while(it.hasNext()) {
@@ -316,8 +329,9 @@ public class CardDeck {
 	/**
 	 * Returns a concatenation of the names of every
 	 * card inside the deck.
+	 * Similar to toString.
 	 * @see java.lang.Object#toString()
-	 * 
+	 * @return String
 	 */
 	public String getCardsString() {
 		String buff = "";
@@ -339,6 +353,10 @@ public class CardDeck {
 		return this.name + " (" + this.deck.size() + ")";
 	}
 	
+	/**
+	 * Gets deck size.
+	 * @return Size.
+	 */
 	public int size() {
 		
 		return this.deck.size();

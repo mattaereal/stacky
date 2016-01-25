@@ -9,6 +9,13 @@ public class GameCriterionBigger extends GameCriterion {
 	private final String name = "Bigger (Criterion)";
 	static Logger logger = Logger.getLogger(Main.class.getName());
 
+	/**
+	 * Confronts two cards with the selected attribute.
+	 * @param c1 Card from player 1.
+	 * @param c2 Card from player 2.
+	 * @param attribute Selected attribute
+	 * @return an int representing the result based on the static ints defined.
+	 */
 	@Override
 	public int fight(AbstractCard c1, AbstractCard c2, String attribute) throws RuntimeException {
 		logger.info("Fighting over -> " + attribute + ": " +
@@ -24,6 +31,10 @@ public class GameCriterionBigger extends GameCriterion {
 		throw new RuntimeException("Something happened @ GameCriterionBigger");
 	}
 
+	/**
+	 * Returns deck name and the quantity of the cards in it.
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		return this.name;
